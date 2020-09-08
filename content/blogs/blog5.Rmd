@@ -8,7 +8,7 @@ draft: false
 image: pic07.jpg
 keywords: ""
 slug: blog5
-title: Mask Accepta
+title: Mask Accept
 ---
 
 

@@ -8,7 +8,7 @@
 	<meta name="description" content="I am a Masters in Analytics and Management student at LBS">
 	<meta name="author" content="Aleksandar Vignjevic">
 	<meta name="generator" content="Hugo 0.74.3" />
-	<title>Mask Acceptance &middot; Portfolio Website for Alex Vignjevic</title>
+	<title>Mask Accept &middot; Portfolio Website for Alex Vignjevic</title>
 	<!-- Stylesheets -->
 	
 	<link rel="stylesheet" href="/css/main.css"/>
@@ -71,7 +71,7 @@
                     <section id="one">
                         <div class="inner">
                             <header class="major">
-                                <h1>Mask Acceptance</h1>
+                                <h1>Mask Accept</h1>
                             </header>
                             
                                 <span class="image main"><img src="/img/blogs/pic07.jpg" alt="" /></span>
@@ -122,44 +122,44 @@ glimpse(nyt_mask_survey)</code></pre>
 # The id field is the FIPS code for the county
 county_map %&gt;% 
   sample_n(5)</code></pre>
-<pre><code>##      long      lat  order  hole piece            group    id
-## 1 -594517   195121 107639 FALSE     1 0500000US30065.1 30065
-## 2 1770636 -1846210  36606 FALSE     2 0500000US12071.2 12071
-## 3  944118   148042 188852 FALSE     1 0500000US55075.1 55075
-## 4 2036541  -225832 139872 FALSE     1 0500000US42029.1 42029
-## 5 -986946  -510637 166617 FALSE     1 0500000US49023.1 49023</code></pre>
+<pre><code>##       long      lat  order  hole piece            group    id
+## 1  1595859  -921437 145120 FALSE     1 0500000US45045.1 45045
+## 2  1262849  -752729  65780 FALSE     1 0500000US21099.1 21099
+## 3 -1207542 -2215256  10481 FALSE     3 0500000US02150.3 02150
+## 4 -1441721 -2358284   4453 FALSE     1 0500000US02013.1 02013
+## 5  1878041  -665364 172346 FALSE     1 0500000US51083.1 51083</code></pre>
 <pre class="r"><code>county_data %&gt;%
     sample_n(5)</code></pre>
-<pre><code>##      id              name state census_region      pop_dens   pop_dens4
-## 1 29181     Ripley County    MO       Midwest [   10,   50) [ 17,   45)
-## 2 45071   Newberry County    SC         South [   50,  100) [ 45,  118)
-## 3 13101     Echols County    GA         South [    0,   10) [  0,   17)
-## 4 27171     Wright County    MN       Midwest [  100,  500) [118,71672]
-## 5 44007 Providence County    RI     Northeast [ 1000, 5000) [118,71672]
+<pre><code>##      id            name state census_region      pop_dens   pop_dens4
+## 1 42017    Bucks County    PA     Northeast [ 1000, 5000) [118,71672]
+## 2 29199 Scotland County    MO       Midwest [   10,   50) [  0,   17)
+## 3 51750    Radford city    VA         South [ 1000, 5000) [118,71672]
+## 4 26107  Mecosta County    MI       Midwest [   50,  100) [ 45,  118)
+## 5 18055   Greene County    IN       Midwest [   50,  100) [ 45,  118)
 ##     pop_dens6   pct_black    pop female white black travel_time land_area
-## 1 [  9,   25) [ 0.0, 2.0)  13969   50.6  96.6   0.5        22.0       630
-## 2 [ 45,   82) [25.0,50.0)  37783   51.1  65.6  31.2        24.4       630
-## 3 [  9,   25) [ 5.0,10.0)   4003   50.6  88.7   5.3        24.8       415
-## 4 [ 82,  215) [ 0.0, 2.0) 129918   49.7  95.6   1.1        30.1       661
-## 5 [215,71672] [10.0,15.0) 631974   51.5  80.4  11.1        23.1       410
+## 1 [215,71672] [ 2.0, 5.0) 626685   51.0  89.8   4.0        28.3    604.31
+## 2 [  9,   25) [ 0.0, 2.0)   4863   50.6  98.8   0.1        20.7    436.67
+## 3 [215,71672] [ 5.0,10.0)  17646   52.6  86.3   8.9        18.7      9.87
+## 4 [ 45,   82) [ 2.0, 5.0)  43186   49.9  93.3   3.0        22.5    555.07
+## 5 [ 45,   82) [ 0.0, 2.0)  32726   50.0  98.1   0.3        29.4    542.50
 ##   hh_income su_gun4 su_gun6  fips votes_dem_2016 votes_gop_2016
-## 1     32291 [11,54] [10,12) 29181            830           4520
-## 2     41718 [ 8,11) [ 8,10) 45071           6212          10011
-## 3     31375 [ 0, 5) [ 0, 4) 13101            156           1006
-## 4     71598 [ 0, 5) [ 4, 7) 27171          20336          43274
-## 5     49297 [ 0, 5) [ 0, 4) 44007         141597          90321
+## 1     76555 [ 0, 5) [ 4, 7) 42017         165861         163873
+## 2     39028 [ 0, 5) [ 0, 4) 29199            365           1525
+## 3     30714 [ 5, 8) [ 7, 8) 51750           2923           2637
+## 4     39470 [ 5, 8) [ 7, 8) 26107           5827          10305
+## 5     43980 [ 8,11) [10,12) 18055           2929          10275
 ##   total_votes_2016 per_dem_2016 per_gop_2016 diff_2016 per_dem_2012
-## 1             5518        0.150        0.819      3690        0.265
-## 2            16795        0.370        0.596      3799        0.423
-## 3             1175        0.133        0.856       850        0.157
-## 4            69154        0.294        0.626     22938        0.382
-## 5           241818        0.586        0.374     51276        0.666
+## 1           342572        0.484        0.478      1988        0.500
+## 2             1968        0.185        0.775      1160        0.332
+## 3             6032        0.485        0.437       286        0.508
+## 4            17149        0.340        0.601      4478        0.445
+## 5            13763        0.213        0.747      7346        0.331
 ##   per_gop_2012 diff_2012  winner partywinner16 winner12 partywinner12 flipped
-## 1        0.711      2347   Trump    Republican   Romney    Republican      No
-## 2        0.566      2327   Trump    Republican   Romney    Republican      No
-## 3        0.832       744   Trump    Republican   Romney    Republican      No
-## 4        0.596     14876   Trump    Republican   Romney    Republican      No
-## 5        0.318     81678 Clinton      Democrat    Obama      Democrat      No</code></pre>
+## 1        0.488      3722 Clinton      Democrat    Obama      Democrat      No
+## 2        0.644       603   Trump    Republican   Romney    Republican      No
+## 3        0.468       212 Clinton      Democrat    Obama      Democrat      No
+## 4        0.544      1660   Trump    Republican   Romney    Republican      No
+## 5        0.646      4117   Trump    Republican   Romney    Republican      No</code></pre>
 <pre class="r"><code>glimpse(county_data)</code></pre>
 <pre><code>## Rows: 3,195
 ## Columns: 32
