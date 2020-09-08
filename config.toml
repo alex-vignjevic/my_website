@@ -83,7 +83,7 @@ disqusShortname = ""
     # the 'static/img' folder.
     title = "Hi, my name is Alex"
     subtitle = "Welcome to my website."
-    buttonText = "Get Started"
+    buttonText = "My Projects"
 
 
   # Tiles Section
@@ -92,9 +92,9 @@ disqusShortname = ""
     # Display your showcases here.
     
     [[params.tiles.showcase]]
-      title = "NYT MASK"
-      subtitle = "LALA"
-      image = "projects/picture1.jpg"
+      title = "NYT Masks"
+      subtitle = "HOW DOES MASK USE ACCEPTANCE VARY IN THE US?"
+      image = "pic07.jpg"
       url = "blogs/blog5"
 
     [[params.tiles.showcase]]
@@ -102,6 +102,7 @@ disqusShortname = ""
       subtitle = "Feugiat Amet Tempus"
       image = "pic02.jpg"
       url = "blogs/tempus"
+
     [[params.tiles.showcase]]
       title = "Magna"
       subtitle = "Lorem Etiam Nullam"
