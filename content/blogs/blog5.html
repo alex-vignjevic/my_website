@@ -57,43 +57,43 @@ glimpse(nyt_mask_survey)</code></pre>
 county_map %&gt;% 
   sample_n(5)</code></pre>
 <pre><code>##       long      lat  order  hole piece            group    id
-## 1   978771   -43802 188741 FALSE     1 0500000US55071.1 55071
-## 2  1620708  -268305 139284 FALSE     1 0500000US42007.1 42007
-## 3   727615 -1437105  71824 FALSE     1 0500000US22043.1 22043
-## 4   347023  -467418 111372 FALSE     1 0500000US31131.1 31131
-## 5 -1068787   149856  49932 FALSE     1 0500000US16059.1 16059</code></pre>
+## 1  1340070  -602815  69533 FALSE     1 0500000US21209.1 21209
+## 2   801062   -73573 188414 FALSE     1 0500000US55057.1 55057
+## 3 -1818931    18302 137069 FALSE     1 0500000US41019.1 41019
+## 4  -350676  -488739  33236 FALSE     1 0500000US08123.1 08123
+## 5   314492 -1226651 159308 FALSE     1 0500000US48181.1 48181</code></pre>
 <pre class="r"><code>county_data %&gt;%
     sample_n(5)</code></pre>
-<pre><code>##      id           name state census_region      pop_dens   pop_dens4
-## 1 26035   Clare County    MI       Midwest [   50,  100) [ 45,  118)
-## 2 32011  Eureka County    NV          West [    0,   10) [  0,   17)
-## 3 16065 Madison County    ID          West [   50,  100) [ 45,  118)
-## 4 20175  Seward County    KS       Midwest [   10,   50) [ 17,   45)
-## 5 20151   Pratt County    KS       Midwest [   10,   50) [  0,   17)
-##     pop_dens6   pct_black   pop female white black travel_time land_area
-## 1 [ 45,   82) [ 0.0, 2.0) 30652   50.1  96.8   0.6        26.1       564
-## 2 [  0,    9) [ 0.0, 2.0)  2018   45.8  92.7   1.1        14.8      4176
-## 3 [ 45,   82) [ 0.0, 2.0) 38038   49.9  95.8   0.6        17.1       469
-## 4 [ 25,   45) [ 2.0, 5.0) 23465   48.4  89.4   4.1        14.5       640
-## 5 [  9,   25) [ 0.0, 2.0)  9850   50.1  95.0   1.4        14.7       735
+<pre><code>##      id             name state census_region      pop_dens   pop_dens4
+## 1 46035   Davison County    SD       Midwest [   10,   50) [ 45,  118)
+## 2 28127   Simpson County    MS         South [   10,   50) [ 45,  118)
+## 3 55091     Pepin County    WI       Midwest [   10,   50) [ 17,   45)
+## 4 53011     Clark County    WA          West [  500, 1000) [118,71672]
+## 5 12055 Highlands County    FL         South [   50,  100) [ 45,  118)
+##     pop_dens6   pct_black    pop female white black travel_time land_area
+## 1 [ 45,   82) [ 0.0, 2.0)  19885   50.3  94.2   1.0        14.5       436
+## 2 [ 45,   82) [25.0,50.0)  27463   51.3  62.7  35.6        34.2       589
+## 3 [ 25,   45) [ 0.0, 2.0)   7335   49.5  98.1   0.5        25.5       232
+## 4 [215,71672] [ 2.0, 5.0) 451008   50.6  87.7   2.1        24.9       629
+## 5 [ 82,  215) [10.0,15.0)  98236   51.3  85.8  10.4        21.9      1017
 ##   hh_income su_gun4 su_gun6  fips votes_dem_2016 votes_gop_2016
-## 1     32668 [ 8,11) [ 8,10) 26035           4250           8507
-## 2     64632 [ 0, 5) [ 0, 4) 32011             74            723
-## 3     32059 [ 0, 5) [ 4, 7) 16065           1201           8941
-## 4     50185 [ 0, 5) [ 0, 4) 20175           1491           3025
-## 5     46035 [11,54] [10,12) 20151            769           2824
+## 1     48341 [ 8,11) [10,12) 46035           2355           5157
+## 2     38362 [11,54] [12,54] 28127           3871           7393
+## 3     47701 [ 8,11) [10,12) 55091           1345           2228
+## 4     58225 [ 5, 8) [ 7, 8) 53011          90697          90590
+## 5     35560 [11,54] [10,12) 12055          14901          29509
 ##   total_votes_2016 per_dem_2016 per_gop_2016 diff_2016 per_dem_2012
-## 1            13385       0.3175        0.636      4257       0.4697
-## 2              854       0.0867        0.847       649       0.1324
-## 3            15687       0.0766        0.570      7740       0.0577
-## 4             4743       0.3144        0.638      1534       0.2811
-## 5             3806       0.2020        0.742      2055       0.2596
-##   per_gop_2012 diff_2012 winner partywinner16 winner12 partywinner12 flipped
-## 1        0.518       651  Trump    Republican   Romney    Republican      No
-## 2        0.821       556  Trump    Republican   Romney    Republican      No
-## 3        0.933     12613  Trump    Republican   Romney    Republican      No
-## 4        0.705      2102  Trump    Republican   Romney    Republican      No
-## 5        0.728      1756  Trump    Republican   Romney    Republican      No</code></pre>
+## 1             7952        0.296        0.649      2802        0.382
+## 2            11416        0.339        0.648      3522        0.386
+## 3             3746        0.359        0.595       883        0.507
+## 4           195784        0.463        0.463       107        0.489
+## 5            45589        0.327        0.647     14608        0.380
+##   per_gop_2012 diff_2012  winner partywinner16 winner12 partywinner12 flipped
+## 1        0.597      1712   Trump    Republican   Romney    Republican      No
+## 2        0.606      2701   Trump    Republican   Romney    Republican      No
+## 3        0.485        82   Trump    Republican    Obama      Democrat     Yes
+## 4        0.488       193 Clinton      Democrat    Obama      Democrat      No
+## 5        0.611      9765   Trump    Republican   Romney    Republican      No</code></pre>
 <pre class="r"><code>glimpse(county_data)</code></pre>
 <pre><code>## Rows: 3,195
 ## Columns: 32
