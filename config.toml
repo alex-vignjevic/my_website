@@ -48,7 +48,7 @@ disqusShortname = ""
       url = "#"
 
     [[params.navigation.links]]
-      name = "Blogs"
+      name = "Projects"
       url = "blogs"
 
     #[[params.navigation.links]]
@@ -98,10 +98,10 @@ disqusShortname = ""
       url = "blogs/blog5"
 
     [[params.tiles.showcase]]
-      title = "Tempus"
-      subtitle = "Feugiat Amet Tempus"
-      image = "pic02.jpg"
-      url = "blogs/tempus"
+      title = "Covid-19"
+      subtitle = "Which groups are at the highest risk?"
+      image = "covid-19.png"
+      url = "blogs/blog6"
 
     [[params.tiles.showcase]]
       title = "Magna"
