@@ -100,7 +100,7 @@ disqusShortname = ""
     [[params.tiles.showcase]]
       title = "Covid-19"
       subtitle = "Which groups are at the highest risk?"
-      image = "pic07.jpg"
+      image = "pic08.jpg"
       url = "blogs/blog6"
 
     [[params.tiles.showcase]]
