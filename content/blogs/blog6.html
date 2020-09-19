@@ -1,0 +1,170 @@
+---
+title: "Covid-19 death rate across gender,age, time"
+date: '2020-19-07'
+description: CDC Covid-19 Data Analysis
+draft: no
+image: covid-19.png
+keywords: ''
+slug: blog6
+categories:
+- ''
+- ''
+---
+
+
+
+<div id="cdc-covid-19-public-use-data" class="section level1">
+<h1>CDC COVID-19 Public Use Data</h1>
+<p>The data used throughout the analysis can be found at the link below:</p>
+<p>(<a href="https://data.cdc.gov/Case-Surveillance/COVID-19-Case-Surveillance-Public-Use-Data/vbim-akqf" class="uri">https://data.cdc.gov/Case-Surveillance/COVID-19-Case-Surveillance-Public-Use-Data/vbim-akqf</a>).</p>
+<pre class="r"><code># The data is loaded and the direct link can be found below
+
+url &lt;- &quot;https://data.cdc.gov/api/views/vbim-akqf/rows.csv?accessType=DOWNLOAD&quot;
+
+covid_data &lt;- vroom(url)%&gt;%
+  clean_names()</code></pre>
+<pre class="r"><code>#Inspecting data
+
+glimpse(covid_data)</code></pre>
+<pre><code>## Rows: 3,662,325
+## Columns: 11
+## $ cdc_report_dt               &lt;date&gt; 2020-03-03, 2020-03-03, 2020-04-07, 20...
+## $ pos_spec_dt                 &lt;date&gt; 2020-03-03, 2020-03-03, 2020-03-03, 20...
+## $ onset_dt                    &lt;date&gt; NA, NA, 2020-03-03, NA, 2020-07-28, 20...
+## $ current_status              &lt;chr&gt; &quot;Laboratory-confirmed case&quot;, &quot;Laborator...
+## $ sex                         &lt;chr&gt; &quot;Male&quot;, &quot;Female&quot;, &quot;Unknown&quot;, &quot;Male&quot;, &quot;M...
+## $ age_group                   &lt;chr&gt; &quot;0 - 9 Years&quot;, &quot;0 - 9 Years&quot;, &quot;0 - 9 Ye...
+## $ race_and_ethnicity_combined &lt;chr&gt; &quot;Unknown&quot;, &quot;Unknown&quot;, &quot;Unknown&quot;, &quot;Unkno...
+## $ hosp_yn                     &lt;chr&gt; &quot;Missing&quot;, &quot;Missing&quot;, &quot;No&quot;, &quot;Missing&quot;, ...
+## $ icu_yn                      &lt;chr&gt; &quot;Missing&quot;, &quot;Missing&quot;, &quot;Missing&quot;, &quot;Missi...
+## $ death_yn                    &lt;chr&gt; &quot;Missing&quot;, &quot;Missing&quot;, &quot;Missing&quot;, &quot;Missi...
+## $ medcond_yn                  &lt;chr&gt; &quot;Missing&quot;, &quot;Missing&quot;, &quot;Missing&quot;, &quot;Missi...</code></pre>
+<p>The dataset has 3,662,325 rows and 11 columns
+As can be seen many of the values in the data set are either Missing, Unknown or NA</p>
+</div>
+<div id="death-rate-across-gender-age-and-if-the-patient-had-comorbidites-or-not" class="section level1">
+<h1>Death rate across gender, age and if the patient had comorbidites or not</h1>
+<pre class="r"><code>covid_death_rate_comorbidities&lt;-covid_data %&gt;% 
+
+# first the data has to be filtered to exclude missing values. Variable medcond_yn refers to weather the patient had comorbidities or not
+# whereas death_yn refers to weather the patient died or not
+
+  filter(sex %in% c(&#39;Male&#39;,&#39;Female&#39;),!age_group %in% c(&#39;Unknown&#39;,NA),medcond_yn %in% c(&#39;Yes&#39;,&#39;No&#39;),
+  death_yn %in% c(&#39;Yes&#39;,&#39;No&#39;)) %&gt;% 
+
+# dataset is filtered to include only 4 out of 11 columns that we are interested in
+  
+  select(sex,age_group,death_yn,medcond_yn) %&gt;% 
+  
+# since we are interested in death rate accros sex, age group and medical conditions (comorbidities) we group by those 3 variables
+  
+  group_by(sex,age_group,medcond_yn) %&gt;% 
+  
+# finally we calculate the death rate and select columns of interest
+  
+  summarize(death=sum(death_yn==&quot;Yes&quot;),total=n()) %&gt;% 
+  mutate(death_rate=(death/total*100)) %&gt;% 
+  select(sex,age_group,medcond_yn,death_rate)
+
+# the labels in the column med_cond are changed
+
+
+new_labels&lt;-c(&#39;Yes&#39;=&#39;With Comorbidities&#39;,&#39;No&#39;=&#39;Without Comorbidities&#39;)
+
+# finally the plot is shown
+
+
+ggplot(covid_death_rate_comorbidities,aes(x=death_rate,y=age_group))+
+geom_col(fill=&#39;#085891&#39;)+
+facet_grid(medcond_yn~sex,as.table=FALSE,labeller=labeller(medcond_yn=new_labels))+
+  theme_bw()+
+  geom_text(aes(label=round(death_rate,digits=1)),hjust=-0.1,size=3)+
+  expand_limits(x=c(0,75))+
+  scale_x_continuous(labels=label_percent(scale=1))+
+  labs(title=&#39;Covid death % percent by age group, sex, and presence of co-morbidities&#39;,x=&#39;&#39;,y=&#39;&#39;,caption=&#39;Source:CDC&#39;)+
+  theme(plot.title=element_text(size=9))</code></pre>
+<p><img src="/blogs/blog6_files/figure-html/unnamed-chunk-3-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p>As can be seen, the death rate is generally higher for males as compared to females. Furthermore the death rate for those with comorbidites is</p>
+<p>significantly higher than for those without comorbidities. This effect is best seen for top age categories, as those in the lower age categories</p>
+<p>have comorbidities much more rarely. As expected, the death rate increases significantly with age.</p>
+</div>
+<div id="death-rate-across-gender-age-and-if-the-patient-was-admitted-to-intensive-care-unit-or-not" class="section level1">
+<h1>Death rate across gender, age and if the patient was admitted to Intensive care unit or not</h1>
+<pre class="r"><code>#first the data has to be filtered to exclude missing values. icu_yn refers to weather the patient was admitted to icu or not
+
+covid_death_rate_icu&lt;-covid_data %&gt;% 
+  filter(sex %in% c(&#39;Male&#39;,&#39;Female&#39;),!age_group %in% c(&#39;Unknown&#39;,NA),icu_yn %in% c(&#39;Yes&#39;,&#39;No&#39;),
+  death_yn %in% c(&#39;Yes&#39;,&#39;No&#39;)) %&gt;% 
+  
+# dataset is filtered to include only 4 out of 11 columns that we are interested in
+  
+  select(sex,age_group,death_yn,icu_yn) %&gt;% 
+
+# since we are interested in death rate accros sex, age group and weahter patient was admitted to ICU we group by those 3 variables 
+  group_by(sex,age_group,icu_yn) %&gt;% 
+  
+# # finally we calculate the death rate and select columns of interest  
+  summarize(death=sum(death_yn==&quot;Yes&quot;),total=n()) %&gt;% 
+  mutate(death_rate=(death/total*100)) %&gt;% 
+  select(sex,age_group,icu_yn,death_rate)
+
+# the labels in the column icu_yn are changed
+
+new_labels_icu&lt;-c(&#39;Yes&#39;=&#39;Admitted to ICU&#39;,&#39;No&#39;=&#39;No ICU&#39;)
+
+# finally the plot is shown
+
+ggplot(covid_death_rate_icu,aes(x=death_rate,y=age_group))+
+geom_col(fill=&#39;#ff8499&#39;)+
+facet_grid(icu_yn~sex,as.table=FALSE,labeller=labeller(icu_yn=new_labels_icu))+
+  theme_bw()+
+  geom_text(aes(label=round(death_rate,digits=1)),hjust=-0.1,size=3)+
+  expand_limits(x=c(0,90))+
+  scale_x_continuous(labels=label_percent(scale=1))+
+  labs(title=&#39;Covid death % percent by age group, sex, and weather patient was admitted to ICU&#39;,x=&#39;&#39;,y=&#39;&#39;,caption=&#39;Source:CDC&#39;)+
+  theme(plot.title=element_text(size=9))</code></pre>
+<p><img src="/blogs/blog6_files/figure-html/unnamed-chunk-4-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p>Similar to our previous graph, the death rate is generally higher for males as compared to females and the death rate for those who were admitted to intensive care unit is higher. This is expected as those admitted to icu probably had comorbidites and heavier sympotms than those not admitted, leading to higher death rate among admitted individuals.</p>
+<p>Next we explore how the death rate of patients admitted to ICU has changed over time in the U.S. In July The Telegraph reported that the number of deaths among ICU patients in the UK was reduced by a third once the steroid dexamethasone was introduced and possibly due to other factors.</p>
+<p>(<a href="https://www.nytimes.com/article/coronavirus-timeline.html" class="uri">https://www.nytimes.com/article/coronavirus-timeline.html</a>)</p>
+<p>Interestingly, dexamethasone was given to US patients as well as the pandemic was evolving.</p>
+<p>(<a href="https://uk.reuters.com/article/us-health-coronavirus-usa-dexamethasone/u-s-hospitals-in-hard-hit-regions-step-up-use-of-steroids-on-sickest-covid-19-patients-idUKKBN23Q1MN" class="uri">https://uk.reuters.com/article/us-health-coronavirus-usa-dexamethasone/u-s-hospitals-in-hard-hit-regions-step-up-use-of-steroids-on-sickest-covid-19-patients-idUKKBN23Q1MN</a>)</p>
+<pre class="r"><code># the data is cleaned to iclude only relevant values
+covid_icu_time&lt;- covid_data %&gt;% 
+filter(sex %in% c(&#39;Male&#39;,&#39;Female&#39;),icu_yn==&#39;Yes&#39;,
+  death_yn %in% c(&#39;Yes&#39;,&#39;No&#39;), !is.na(onset_dt)) %&gt;% 
+select(death_yn,icu_yn,onset_dt) %&gt;% 
+  arrange(onset_dt)
+
+# library lubridate is used to convert dates to numbers and dates are then group
+
+covid_icu_time&lt;- covid_icu_time %&gt;%
+mutate(month=month(onset_dt)) %&gt;% 
+  filter(! month %in% c(1:2)) %&gt;% 
+mutate(onset=case_when(
+month %in% c(3:5)~ &#39;March-May&#39;,
+month %in% c(6:8)~ &#39;June-August&#39;))
+ 
+# death_rate is calculated
+death_rate_icu_US&lt;- covid_icu_time %&gt;% 
+  select(onset,death_yn) %&gt;% 
+  group_by(onset) %&gt;% 
+  summarise(death=sum(death_yn==&#39;Yes&#39;),total=n()) %&gt;% 
+  mutate(death_rate=death/total*100) %&gt;% 
+  arrange(desc(death_rate))
+
+
+# death rate is plotted
+
+ggplot(death_rate_icu_US,aes(x=reorder(onset,-death_rate),y=death_rate))+
+geom_col(fill=&#39;blue&#39;)+
+  theme_bw()+
+  geom_text(aes(label=round(death_rate,digits=1)),hjust=0,vjust=-0.5,size=4)+
+  labs(x=&#39;&#39;,
+       y=&#39;Death rate&#39;,
+       title=&#39; Death rate of ICU admitted patients&#39;)+
+  expand_limits(y=c(0,65))+
+  scale_y_continuous(labels=label_percent(scale=1))</code></pre>
+<p><img src="/blogs/blog6_files/figure-html/unnamed-chunk-6-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p>We see that the death rate of US patients that were admitted to ICU also decreased by around 1/3 over time. However, the effect can not be attributed to dexamethasone as the data on whether the patients have received it or not is not available.</p>
+</div>
