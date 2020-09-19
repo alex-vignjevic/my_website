@@ -1,14 +1,14 @@
 ---
-categories:
-- ""
-- ""
-date: "2020-09-07"
+title: "Mask Acceptance"
+date: '2020-09-07'
 description: Is mask acceptance high in the US? NYT Survey analysis
-draft: false
+draft: no
 image: pic07.jpg
-keywords: ""
+keywords: ''
 slug: blog5
-title: Mask Accept
+categories:
+- ''
+- ''
 ---
 
 
