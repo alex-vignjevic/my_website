@@ -81,7 +81,7 @@ disqusShortname = ""
   [params.banner]
     # To change the background image on the homepage banner, replace 'banner.jpg' in
     # the 'static/img' folder.
-    title = "Analysis of various datasets using R"
+    title = "Analysing data using R"
     subtitle = "Welcome to my website. I am currently doing a Masters in Analytics & Management at London Business School having previously graduated from University of Warwick with a degree in Economics."
     buttonText = "My Projects"
 
@@ -104,8 +104,8 @@ disqusShortname = ""
       url = "blogs/blog6"
 
     [[params.tiles.showcase]]
-      title = "B7"
-      subtitle = "A"
+      title = "Airbnb data analysis"
+      subtitle = "Cape Town"
       image = "pic03.jpg"
       url = "blogs/blog7"
 
