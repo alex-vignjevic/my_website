@@ -12,13 +12,13 @@
     
     
     <item>
-      <title>Analysis of Rentals</title>
+      <title>Analysis of tfl London bikes hired</title>
       <link>/blogs/blog9/</link>
       <pubDate>Sun, 20 Sep 2020 00:00:00 +0000</pubDate>
       
       <guid>/blogs/blog9/</guid>
       <description>Data on tfl bikes hired is downloaded
-url &amp;lt;- &amp;quot;https://data.london.gov.uk/download/number-bicycle-hires/ac29363e-e0cb-47cc-a97a-e216d900a6b0/tfl-daily-cycle-hires.xlsx&amp;quot;# Download TFL data to temporary filehttr::GET(url, write_disk(bike.temp &amp;lt;- tempfile(fileext = &amp;quot;.xlsx&amp;quot;)))## Response [https://airdrive-secure.s3-eu-west-1.amazonaws.com/london/dataset/number-bicycle-hires/2020-09-18T09%3A06%3A54/tfl-daily-cycle-hires.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;amp;X-Amz-Credential=AKIAJJDIMAIVZJDICKHA%2F20200920%2Feu-west-1%2Fs3%2Faws4_request&amp;amp;X-Amz-Date=20200920T174221Z&amp;amp;X-Amz-Expires=300&amp;amp;X-Amz-Signature=652a6fa9e3391bf49a8392f66c7bb012c4b08cc6d2b359797ba034e77d73a5df&amp;amp;X-Amz-SignedHeaders=host]## Date: 2020-09-20 17:42## Status: 200## Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet## Size: 165 kB## &amp;lt;ON DISK&amp;gt; C:\Users\vignj\AppData\Local\Temp\RtmpOCOYtF\file10d04f3771de.xlsx# Use read_excel to read it as dataframebike0 &amp;lt;- read_excel(bike.temp,sheet = &amp;quot;Data&amp;quot;,range = cell_cols(&amp;quot;A:B&amp;quot;))# we want to extract year,day &amp;amp; month from the YMD day formatbike &amp;lt;- bike0 %&amp;gt;% clean_names() %&amp;gt;% rename (bikes_hired = number_of_bicycle_hires) %&amp;gt;% mutate (year = year(day),month = lubridate::month(day, label = TRUE),week = isoweek(day))# since we are only interested in average rental of bikes per month for the period 2015-2020 we filter and group in the following waybike_filtered &amp;lt;- bike %&amp;gt;%filter(year %in% c(2015: 2020)) %&amp;gt;%group_by(year, month) %&amp;gt;%summarise(avgMonth=mean(bikes_hired))# now we group by month to find average number of bikes hired per month over the course of four yearsbike_monthly_average &amp;lt;- bike_filtered %&amp;gt;%filter(year %in% c(2015: 2019)) %&amp;gt;%group_by(month) %&amp;gt;%summarise(year_avgMonth=mean(avgMonth))# Change month to numericbike_filtered$month &amp;lt;- as.</description>
+url &amp;lt;- &amp;quot;https://data.london.gov.uk/download/number-bicycle-hires/ac29363e-e0cb-47cc-a97a-e216d900a6b0/tfl-daily-cycle-hires.xlsx&amp;quot;# Download TFL data to temporary filehttr::GET(url, write_disk(bike.temp &amp;lt;- tempfile(fileext = &amp;quot;.xlsx&amp;quot;)))## Response [https://airdrive-secure.s3-eu-west-1.amazonaws.com/london/dataset/number-bicycle-hires/2020-09-18T09%3A06%3A54/tfl-daily-cycle-hires.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;amp;X-Amz-Credential=AKIAJJDIMAIVZJDICKHA%2F20200920%2Feu-west-1%2Fs3%2Faws4_request&amp;amp;X-Amz-Date=20200920T175609Z&amp;amp;X-Amz-Expires=300&amp;amp;X-Amz-Signature=dbbc50c6eb63e2d713ffc6fc0653246676a702268f8c3e84ec092ae00a47a9c9&amp;amp;X-Amz-SignedHeaders=host]## Date: 2020-09-20 17:56## Status: 200## Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet## Size: 165 kB## &amp;lt;ON DISK&amp;gt; C:\Users\vignj\AppData\Local\Temp\RtmpucNWW9\file44cc2ed75d8.xlsx# Use read_excel to read it as dataframebike0 &amp;lt;- read_excel(bike.temp,sheet = &amp;quot;Data&amp;quot;,range = cell_cols(&amp;quot;A:B&amp;quot;))# we want to extract year,day &amp;amp; month from the YMD day formatbike &amp;lt;- bike0 %&amp;gt;% clean_names() %&amp;gt;% rename (bikes_hired = number_of_bicycle_hires) %&amp;gt;% mutate (year = year(day),month = lubridate::month(day, label = TRUE),week = isoweek(day))# since we are only interested in average rental of bikes per month for the period 2015-2020 we filter and group in the following waybike_filtered &amp;lt;- bike %&amp;gt;%filter(year %in% c(2015: 2020)) %&amp;gt;%group_by(year, month) %&amp;gt;%summarise(avgMonth=mean(bikes_hired))# now we group by month to find average number of bikes hired per month over the course of four yearsbike_monthly_average &amp;lt;- bike_filtered %&amp;gt;%filter(year %in% c(2015: 2019)) %&amp;gt;%group_by(month) %&amp;gt;%summarise(year_avgMonth=mean(avgMonth))# Change month to numericbike_filtered$month &amp;lt;- as.</description>
     </item>
     
     <item>
@@ -39,16 +39,6 @@ url &amp;lt;- &amp;quot;https://data.london.gov.uk/download/number-bicycle-hires
       
       <guid>/blogs/blog8/</guid>
       <description>Omega Group plc- Pay DiscriminationAt the board meeting of Omega Group Plc., the issue was raised that women were being discriminated in the company, in the sense that the salaries were not the same for male and female executives. A quick analysis of a sample of 50 employees (of which 24 men and 26 women) revealed that the average salary for men was about 8,700 higher than for women.</description>
-    </item>
-    
-    <item>
-      <title>Mask Acceptance</title>
-      <link>/blogs/blog5/</link>
-      <pubDate>Mon, 07 Sep 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/blogs/blog5/</guid>
-      <description>NYT mask useGithub source for data https://github.com/nytimes/covid-19-data/tree/master/mask-use
-Getting the data#Source for data url &amp;lt;- &amp;quot;https://github.com/nytimes/covid-19-data/raw/master/mask-use/mask-use-by-county.csv&amp;quot;nyt_mask_survey&amp;lt;-read_csv(url)#nyt_mask_survey &amp;lt;- read_csv(here::here(&amp;quot;data&amp;quot;, &amp;quot;nyt_mask_survey.csv&amp;quot;))nyt_mask_survey &amp;lt;- nyt_mask_survey %&amp;gt;%clean_names() %&amp;gt;% mutate(mostly_yes= frequently+always,mostly_no = never+rarely,delta = mostly_yes-mostly_no)glimpse(nyt_mask_survey)## Rows: 3,142## Columns: 9## $ countyfp &amp;lt;chr&amp;gt; &amp;quot;01001&amp;quot;, &amp;quot;01003&amp;quot;, &amp;quot;01005&amp;quot;, &amp;quot;01007&amp;quot;, &amp;quot;01009&amp;quot;, &amp;quot;01011&amp;quot;, &amp;quot;0...## $ never &amp;lt;dbl&amp;gt; 0.053, 0.083, 0.067, 0.020, 0.053, 0.031, 0.102, 0.152, .</description>
     </item>
     
     <item>

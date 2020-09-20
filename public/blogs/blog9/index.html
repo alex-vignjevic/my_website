@@ -8,7 +8,7 @@
 	<meta name="description" content="I am a Masters in Analytics and Management student at LBS">
 	<meta name="author" content="Aleksandar Vignjevic">
 	<meta name="generator" content="Hugo 0.74.3" />
-	<title>Analysis of Rentals &middot; Portfolio Website for Alex Vignjevic</title>
+	<title>Analysis of tfl London bikes hired &middot; Portfolio Website for Alex Vignjevic</title>
 	<!-- Stylesheets -->
 	
 	<link rel="stylesheet" href="/css/main.css"/>
@@ -71,7 +71,7 @@
                     <section id="one">
                         <div class="inner">
                             <header class="major">
-                                <h1>Analysis of Rentals</h1>
+                                <h1>Analysis of tfl London bikes hired</h1>
                             </header>
                             
                                 <span class="image main"><img src="/img/blogs/pic14.jpg" alt="" /></span>
@@ -84,12 +84,12 @@
 
 # Download TFL data to temporary file
 httr::GET(url, write_disk(bike.temp &lt;- tempfile(fileext = &quot;.xlsx&quot;)))</code></pre>
-<pre><code>## Response [https://airdrive-secure.s3-eu-west-1.amazonaws.com/london/dataset/number-bicycle-hires/2020-09-18T09%3A06%3A54/tfl-daily-cycle-hires.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAJJDIMAIVZJDICKHA%2F20200920%2Feu-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20200920T174221Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=652a6fa9e3391bf49a8392f66c7bb012c4b08cc6d2b359797ba034e77d73a5df&amp;X-Amz-SignedHeaders=host]
-##   Date: 2020-09-20 17:42
+<pre><code>## Response [https://airdrive-secure.s3-eu-west-1.amazonaws.com/london/dataset/number-bicycle-hires/2020-09-18T09%3A06%3A54/tfl-daily-cycle-hires.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAJJDIMAIVZJDICKHA%2F20200920%2Feu-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20200920T175609Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=dbbc50c6eb63e2d713ffc6fc0653246676a702268f8c3e84ec092ae00a47a9c9&amp;X-Amz-SignedHeaders=host]
+##   Date: 2020-09-20 17:56
 ##   Status: 200
 ##   Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
 ##   Size: 165 kB
-## &lt;ON DISK&gt;  C:\Users\vignj\AppData\Local\Temp\RtmpOCOYtF\file10d04f3771de.xlsx</code></pre>
+## &lt;ON DISK&gt;  C:\Users\vignj\AppData\Local\Temp\RtmpucNWW9\file44cc2ed75d8.xlsx</code></pre>
 <pre class="r"><code># Use read_excel to read it as dataframe
 bike0 &lt;- read_excel(bike.temp,
                    sheet = &quot;Data&quot;,
@@ -173,32 +173,6 @@ labs(x=NULL, y=&quot;Bike Rentals&quot;, caption=&quot;Source: TfL, London Data 
             </div>
             
         <!-- Footer -->
-            
-                <!-- Footer -->
-    <footer id="footer">
-        <div class="inner">
-            <ul class="icons">
-                
-                    <li><a href="https://www.twitter.com" class="icon alt fa-twitter" target="_blank"><span class="label">Twitter</span></a></li>
-                
-                    <li><a href="https://www.facebook.com" class="icon alt fa-facebook" target="_blank"><span class="label">Facebook</span></a></li>
-                
-                    <li><a href="https://www.instagram.com" class="icon alt fa-instagram" target="_blank"><span class="label">Instagram</span></a></li>
-                
-                    <li><a href="https://www.github.com" class="icon alt fa-github" target="_blank"><span class="label">GitHub</span></a></li>
-                
-                    <li><a href="https://www.linkedin.com" class="icon alt fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
-                
-            </ul>
-            <ul class="copyright">
-                <li>&copy; Company Name</li>
-                
-                <li>Design:  <a href="https://www.html5up.net">HTML5 UP</a></li>
-                
-            </ul>
-        </div>
-    </footer>
-
             
         </div>
 
