@@ -170,210 +170,7 @@ listings &lt;- listings %&gt;%
   mutate(price = parse_number(price),
     cleaning_fee = parse_number(cleaning_fee),
     extra_people = parse_number(extra_people),
-    security_deposit = parse_number(security_deposit))
-
-# checking if the variables have been turned to numeric and if there are missing values
-listings %&gt;% 
-  select(price, cleaning_fee, extra_people,security_deposit) %&gt;% 
-  skim()%&gt;%
-  kable()%&gt;%
-  kable_styling()</code></pre>
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-skim_type
-</th>
-<th style="text-align:left;">
-skim_variable
-</th>
-<th style="text-align:right;">
-n_missing
-</th>
-<th style="text-align:right;">
-complete_rate
-</th>
-<th style="text-align:right;">
-numeric.mean
-</th>
-<th style="text-align:right;">
-numeric.sd
-</th>
-<th style="text-align:right;">
-numeric.p0
-</th>
-<th style="text-align:right;">
-numeric.p25
-</th>
-<th style="text-align:right;">
-numeric.p50
-</th>
-<th style="text-align:right;">
-numeric.p75
-</th>
-<th style="text-align:right;">
-numeric.p100
-</th>
-<th style="text-align:left;">
-numeric.hist
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-numeric
-</td>
-<td style="text-align:left;">
-price
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1.000
-</td>
-<td style="text-align:right;">
-2470.0
-</td>
-<td style="text-align:right;">
-7527
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-659
-</td>
-<td style="text-align:right;">
-1058
-</td>
-<td style="text-align:right;">
-2003.0
-</td>
-<td style="text-align:right;">
-300009
-</td>
-<td style="text-align:left;">
-&lt;U+2587&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-numeric
-</td>
-<td style="text-align:left;">
-cleaning_fee
-</td>
-<td style="text-align:right;">
-7049
-</td>
-<td style="text-align:right;">
-0.707
-</td>
-<td style="text-align:right;">
-338.4
-</td>
-<td style="text-align:right;">
-512
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-100
-</td>
-<td style="text-align:right;">
-300
-</td>
-<td style="text-align:right;">
-450.0
-</td>
-<td style="text-align:right;">
-40000
-</td>
-<td style="text-align:left;">
-&lt;U+2587&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-numeric
-</td>
-<td style="text-align:left;">
-extra_people
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1.000
-</td>
-<td style="text-align:right;">
-83.8
-</td>
-<td style="text-align:right;">
-220
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-96.5
-</td>
-<td style="text-align:right;">
-4681
-</td>
-<td style="text-align:left;">
-&lt;U+2587&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-numeric
-</td>
-<td style="text-align:left;">
-security_deposit
-</td>
-<td style="text-align:right;">
-8559
-</td>
-<td style="text-align:right;">
-0.644
-</td>
-<td style="text-align:right;">
-2770.3
-</td>
-<td style="text-align:right;">
-6319
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1478
-</td>
-<td style="text-align:right;">
-3000.0
-</td>
-<td style="text-align:right;">
-150000
-</td>
-<td style="text-align:left;">
-&lt;U+2587&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;
-</td>
-</tr>
-</tbody>
-</table>
+    security_deposit = parse_number(security_deposit))</code></pre>
 <p>Host id is turned into a character value.</p>
 <pre class="r"><code>#Turn IDs into string
 
@@ -390,7 +187,7 @@ listings &lt;- listings %&gt;%
 <p>For security_deposit, since there are 8559 missing values, the missing values will be treated as having no security deposit. The variable security_deposit is turned from a numeric to a dummy variable that evaluates to true if the listing has a security deposit and to false if not. This is done because there is a massive range of security deposits and the distribution is heavily right skewed, containing outliers and typos as well. This will help us determine whether having a security deposit influences the price.</p>
 <pre class="r"><code>ggplot(listings,aes(x=security_deposit))+
   geom_histogram(bins=10)</code></pre>
-<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-8-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-7-1.png" width="648" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>#turning security_deposit into a dummy variable 
 listings &lt;- listings %&gt;%
   mutate(security_deposit = case_when(
@@ -1120,92 +917,6 @@ listings &lt;- listings %&gt;%
 <div id="handling-nas" class="section level2">
 <h2>Handling NAs</h2>
 <p>Some of the variables have missing values. Cleaning fee, for example, which will be used to calculate price for four nights, has 7049 missing values, as seen below. This is most likely because these listings do not charge a cleaning fee, so we will treat N/A values as 0.</p>
-<pre class="r"><code>listings%&gt;%
-skim(cleaning_fee)%&gt;%
-  kable()%&gt;%
-  kable_styling()</code></pre>
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-skim_type
-</th>
-<th style="text-align:left;">
-skim_variable
-</th>
-<th style="text-align:right;">
-n_missing
-</th>
-<th style="text-align:right;">
-complete_rate
-</th>
-<th style="text-align:right;">
-numeric.mean
-</th>
-<th style="text-align:right;">
-numeric.sd
-</th>
-<th style="text-align:right;">
-numeric.p0
-</th>
-<th style="text-align:right;">
-numeric.p25
-</th>
-<th style="text-align:right;">
-numeric.p50
-</th>
-<th style="text-align:right;">
-numeric.p75
-</th>
-<th style="text-align:right;">
-numeric.p100
-</th>
-<th style="text-align:left;">
-numeric.hist
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-numeric
-</td>
-<td style="text-align:left;">
-cleaning_fee
-</td>
-<td style="text-align:right;">
-5253
-</td>
-<td style="text-align:right;">
-0.723
-</td>
-<td style="text-align:right;">
-303
-</td>
-<td style="text-align:right;">
-498
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-80
-</td>
-<td style="text-align:right;">
-250
-</td>
-<td style="text-align:right;">
-432
-</td>
-<td style="text-align:right;">
-40000
-</td>
-<td style="text-align:left;">
-&lt;U+2587&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;
-</td>
-</tr>
-</tbody>
-</table>
 <pre class="r"><code>listings &lt;- listings %&gt;%
   mutate(cleaning_fee = case_when(
     is.na(cleaning_fee) ~ 0, 
@@ -1297,91 +1008,6 @@ missing
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>skim(listings$host_experience_y)%&gt;%
-  kable()%&gt;%
-  kable_styling()</code></pre>
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-skim_type
-</th>
-<th style="text-align:left;">
-skim_variable
-</th>
-<th style="text-align:right;">
-n_missing
-</th>
-<th style="text-align:right;">
-complete_rate
-</th>
-<th style="text-align:right;">
-numeric.mean
-</th>
-<th style="text-align:right;">
-numeric.sd
-</th>
-<th style="text-align:right;">
-numeric.p0
-</th>
-<th style="text-align:right;">
-numeric.p25
-</th>
-<th style="text-align:right;">
-numeric.p50
-</th>
-<th style="text-align:right;">
-numeric.p75
-</th>
-<th style="text-align:right;">
-numeric.p100
-</th>
-<th style="text-align:left;">
-numeric.hist
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-numeric
-</td>
-<td style="text-align:left;">
-data
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-4.29
-</td>
-<td style="text-align:right;">
-2.05
-</td>
-<td style="text-align:right;">
-0.258
-</td>
-<td style="text-align:right;">
-2.79
-</td>
-<td style="text-align:right;">
-4.42
-</td>
-<td style="text-align:right;">
-5.59
-</td>
-<td style="text-align:right;">
-11.9
-</td>
-<td style="text-align:left;">
-&lt;U+2585&gt;&lt;U+2587&gt;&lt;U+2586&gt;&lt;U+2582&gt;&lt;U+2581&gt;
-</td>
-</tr>
-</tbody>
-</table>
 <pre class="r"><code>ggplot(listings, aes(x=host_experience_y)) +
   geom_density(fill = &quot;lavender&quot;) + 
   labs(x = &quot;Host Experience&quot;, y=&quot;Density&quot;, title= &quot;Host Experience Density Plot&quot;) +
@@ -1389,55 +1015,6 @@ data
 <p><img src="/blogs/blog7_files/figure-html/host-1.png" width="648" style="display: block; margin: auto;" />
 The average number of years of how long a host has been listed is 4.39.</p>
 <p>Next, we will look at host_is_superhost. We might want to use this in our model to examine whether superhosts tend to charge a premium.</p>
-<pre class="r"><code>skim(listings$host_is_superhost)%&gt;%
-  kable()%&gt;%
-  kable_styling()</code></pre>
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-skim_type
-</th>
-<th style="text-align:left;">
-skim_variable
-</th>
-<th style="text-align:right;">
-n_missing
-</th>
-<th style="text-align:right;">
-complete_rate
-</th>
-<th style="text-align:right;">
-logical.mean
-</th>
-<th style="text-align:left;">
-logical.count
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-logical
-</td>
-<td style="text-align:left;">
-data
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0.247
-</td>
-<td style="text-align:left;">
-FAL: 13029, TRU: 4270
-</td>
-</tr>
-</tbody>
-</table>
 <pre class="r"><code>listings %&gt;%
   count(host_is_superhost)%&gt;%
   kable()%&gt;%
@@ -1484,95 +1061,9 @@ NA
   geom_bar(width = 0.5, color = &quot;blue&quot;, fill = &quot;#77a5f0&quot;) +
   labs(x = &quot;Super Host&quot;, y=&quot;Density&quot;, title= &quot;Distribution of Superhosts&quot;) +
   theme_minimal() </code></pre>
-<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-20-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-19-1.png" width="648" style="display: block; margin: auto;" /></p>
 <p>Based on the data above, roughly 1/4 of all hosts in Cape Town are super hosts.</p>
 <p>Now, we look at number_of_reviews, which represents the total number of reviews on a particular listing.</p>
-<pre class="r"><code>listings%&gt;%
-  skim(number_of_reviews)%&gt;%
-  kable()%&gt;%
-  kable_styling()</code></pre>
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-skim_type
-</th>
-<th style="text-align:left;">
-skim_variable
-</th>
-<th style="text-align:right;">
-n_missing
-</th>
-<th style="text-align:right;">
-complete_rate
-</th>
-<th style="text-align:right;">
-numeric.mean
-</th>
-<th style="text-align:right;">
-numeric.sd
-</th>
-<th style="text-align:right;">
-numeric.p0
-</th>
-<th style="text-align:right;">
-numeric.p25
-</th>
-<th style="text-align:right;">
-numeric.p50
-</th>
-<th style="text-align:right;">
-numeric.p75
-</th>
-<th style="text-align:right;">
-numeric.p100
-</th>
-<th style="text-align:left;">
-numeric.hist
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-numeric
-</td>
-<td style="text-align:left;">
-number_of_reviews
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-15.9
-</td>
-<td style="text-align:right;">
-30.7
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-16
-</td>
-<td style="text-align:right;">
-425
-</td>
-<td style="text-align:left;">
-&lt;U+2587&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;
-</td>
-</tr>
-</tbody>
-</table>
 <pre class="r"><code>kable(favstats(~number_of_reviews, data=listings))%&gt;%
   kable_styling()</code></pre>
 <table class="table" style="margin-left: auto; margin-right: auto;">
@@ -1650,7 +1141,7 @@ missing
   ggtitle(&quot;Total Number of Reviews&quot;) +
   coord_cartesian(xlim = c(0, 220)) +
   theme_minimal()</code></pre>
-<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-22-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-21-1.png" width="648" style="display: block; margin: auto;" /></p>
 <p>Based on the histogram, number of reviews is heavily right skewed. It seems like the majority of listings do not have many reviews. The median is 3, yet the mean is 14.4.</p>
 <p>Now we’ll look at the review_scores_rating variable, as we want to examine whether listings with higher reviews charge a premium.</p>
 <pre class="r"><code>  kable(favstats(~review_scores_rating, data=listings))%&gt;%
@@ -1731,7 +1222,7 @@ missing
   labs(x = &quot;Review Score Rating&quot;) +
   ggtitle(&quot;Distribution of Review Score Rating.&quot;) +
   theme_minimal()</code></pre>
-<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-24-1.png" width="648" style="display: block; margin: auto;" />
+<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-23-1.png" width="648" style="display: block; margin: auto;" />
 The distribution is heavily left-skewed with most of the ratings in the 90’s. There is a small second peak at 80.</p>
 <p>The following variables are reviews for individual categories. They all exhibit very similar distributions to review_scores_rating and between each-other. They therefore won’t be added to the models.</p>
 <pre class="r"><code>accuracy&lt;-listings%&gt;%
@@ -1742,7 +1233,7 @@ The distribution is heavily left-skewed with most of the ratings in the 90’s. 
   theme_minimal()</code></pre>
 <pre class="r"><code>library(gridExtra)
 grid.arrange(accuracy, cleanliness, check_in, communication, location, value, nrow = 3, ncol = 3)</code></pre>
-<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-31-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-30-1.png" width="648" style="display: block; margin: auto;" /></p>
 <p>We also want to see if insant booking option is associatied with a higher price. It looks like, based on the table below, properties are pretty evenly split between the two options.</p>
 <pre class="r"><code>ggplot(listings, aes(x = instant_bookable)) +
   geom_bar(width = 0.5, color = &quot;blue&quot;, fill = &quot;#77a5f0&quot;) +
@@ -1750,7 +1241,7 @@ grid.arrange(accuracy, cleanliness, check_in, communication, location, value, nr
   ggtitle(&quot;Count of listings with or without Instant Booking&quot;) +
   theme_minimal() +
   NULL</code></pre>
-<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-32-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-31-1.png" width="648" style="display: block; margin: auto;" /></p>
 <p>We also want to explore the property_type variable.</p>
 <pre class="r"><code>#To check the top 4 categories of property type in Cape Town
 listings %&gt;%
@@ -2106,7 +1597,7 @@ listings %&gt;%
   ggtitle(&quot;Simplified Property Type&quot;) +
   geom_bar(width = 0.5, color = &quot;blue&quot;, fill = &quot;#6dccc1&quot;) +
   theme_minimal()</code></pre>
-<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-34-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-33-1.png" width="648" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>View(listings)</code></pre>
 <p>Finally, we examine the distribution of listings based on quality of life in the area that they are located in.</p>
 <pre class="r"><code>#count by neighborhood
@@ -2165,7 +1656,7 @@ standard
   geom_bar(width = 0.5, color = &quot;blue&quot;, fill = &quot;#77a5f0&quot;) +
   labs(x = &quot;Neighborhood&quot;, y=&quot;Count&quot;, title=&quot;Distribution of listings based on cost of living&quot;) +
   theme_minimal()</code></pre>
-<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-35-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-34-1.png" width="648" style="display: block; margin: auto;" /></p>
 <p>The majority of the Airbnb listings seem to be located in Wards that are classified as “best” with regards to location. These are likely to be popular destinations for tourists.</p>
 </div>
 <div id="examining-correlations-between-variables" class="section level2">
@@ -2176,7 +1667,7 @@ listings%&gt;%
   select(bedrooms, bathrooms, accommodates, review_scores_rating, host_experience_y, price_4_nights) %&gt;% 
   ggpairs(alpha=0.4) +
   theme_minimal()</code></pre>
-<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-36-1.png" width="648" style="display: block; margin: auto;" />
+<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-35-1.png" width="648" style="display: block; margin: auto;" />
 Based on the correlation matrix above, it looks like the variables bathroom,bedrooms, and accommodates are highly correlated. This is expected since the more people a property accommodates the more bathrooms and bedrooms it will have. Therefore, only accommodates will be plugged into the model.</p>
 <p>Now, we will look at the relationship between property type and price.</p>
 <pre class="r"><code>listings %&gt;%
@@ -2185,7 +1676,7 @@ Based on the correlation matrix above, it looks like the variables bathroom,bedr
            theme_minimal()+
           labs(x=&quot;Property Type&quot;, title=&quot;Property Type and Price for Four Nights&quot;)+
           scale_y_continuous(name=&quot;Price for 4 nights&quot;, limits = c(0,60000))</code></pre>
-<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-37-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-36-1.png" width="648" style="display: block; margin: auto;" /></p>
 <p>Based on the plot, Villa and House have a higher price as compared to other property types.</p>
 <p>We will also examine neighborhoods in the plot below.</p>
 <pre class="r"><code>listings %&gt;%
@@ -2194,7 +1685,7 @@ Based on the correlation matrix above, it looks like the variables bathroom,bedr
            theme_minimal()+
           labs(x=&quot;Neighbourood&quot;, title=&quot;Neighbourhood and Price for Four Nights&quot;)+
           scale_y_continuous(name=&quot;Price for 4 nights&quot;, limits = c(0,60000))</code></pre>
-<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-38-1.png" width="648" style="display: block; margin: auto;" />
+<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-37-1.png" width="648" style="display: block; margin: auto;" />
 As expected, it seems like listings in the “best” neighbourhoods are most expensive, while those in “standard” are cheapest. We will test whether this effect is significant later in the model.</p>
 <p>We will also look at host_is_superhost.</p>
 <pre class="r"><code>listings %&gt;%
@@ -2203,7 +1694,7 @@ As expected, it seems like listings in the “best” neighbourhoods are most ex
            theme_minimal()+
           labs(x=&quot;Superhost&quot;, title=&quot;Superhost and Price for Four Nights&quot;)+
           scale_y_continuous(name=&quot;Price for 4 nights&quot;, limits = c(0,60000))</code></pre>
-<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-39-1.png" width="648" style="display: block; margin: auto;" />
+<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-38-1.png" width="648" style="display: block; margin: auto;" />
 There does not seem to be a large difference between whether a host is a superhost and the price of the listing.
 We will also take a look at cancellation_policy.</p>
 <pre class="r"><code>listings %&gt;%
@@ -2212,7 +1703,7 @@ We will also take a look at cancellation_policy.</p>
            theme_minimal()+
           labs(x=&quot;Cancellation Policy&quot;, title=&quot;Cancellation Policy and Price for Four Nights&quot;)+
           scale_y_continuous(name=&quot;Price for 4 nights&quot;, limits = c(0,60000))</code></pre>
-<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-40-1.png" width="648" style="display: block; margin: auto;" />
+<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-39-1.png" width="648" style="display: block; margin: auto;" />
 It seems like listings with stricter policies are slightly more expensive, which could be because they are more desirable listings.</p>
 <p>Finally, we will examine the air conditioning variable.</p>
 <pre class="r"><code>listings %&gt;%
@@ -2221,7 +1712,7 @@ It seems like listings with stricter policies are slightly more expensive, which
            theme_minimal()+
           labs(x=&quot;Air conditioning&quot;, title=&quot;Air conditioning and Price for Four Nights&quot;)+
           scale_y_continuous(name=&quot;Price for 4 nights&quot;, limits = c(0,60000))</code></pre>
-<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-41-1.png" width="648" style="display: block; margin: auto;" />
+<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-40-1.png" width="648" style="display: block; margin: auto;" />
 As expected, it seems like listings that have air conditioning are more expensive. The median seems to be around thousand dollars higher.</p>
 </div>
 </div>
@@ -2250,39 +1741,21 @@ ggplot(data=listings, aes(x=price_4_nights)) +
   geom_density(fill = &quot;lavender&quot;) +
   labs(x=&quot;log of Price for Four Nights&quot;) +
   theme_minimal()</code></pre>
-<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-43-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-42-1.png" width="648" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>#density plot log
 ggplot(data=listings, aes(x=price_4_nights)) + 
   scale_x_log10()+geom_density(fill = &quot;lavender&quot;) + 
   labs(x=&quot;log of Price for Four Nights&quot;) +
   theme_minimal()</code></pre>
-<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-43-2.png" width="648" style="display: block; margin: auto;" />
+<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-42-2.png" width="648" style="display: block; margin: auto;" />
 Price_4_nights is very heavily positively skewed. Log (price_4_nights), on the other hand, is approximately normally distributed. Hence, log (price_4_nights) is a better candidate for further modeling.</p>
-<div id="model-1-prop_type_simplified-number_of_reviews-review_scores_rating" class="section level3">
-<h3>Model 1: prop_type_simplified, number_of_reviews, review_scores_rating</h3>
+<div id="model-1-prop_type_simplified" class="section level3">
+<h3>Model 1: prop_type_simplified</h3>
 <p>Next, we fit a regression model with prop_type_simplified.</p>
 <pre class="r"><code># ***** Fit linear regression models: First, just the mean
 model0 &lt;- lm(log (price_4_nights) ~ 1, data= listings)
 
-model0 %&gt;% 
-  broom::tidy(conf.int=TRUE)</code></pre>
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:unnamed-chunk-44">
-<col><col><col><col><col><col><col><tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">term</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">estimate</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">std.error</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">statistic</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">p.value</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">conf.low</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">conf.high</th></tr>
-<tr>
-<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">(Intercept)</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">8.41</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.0061</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">1.38e+03</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">8.4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">8.43</td></tr>
-</table>
-
-<pre class="r"><code>model0 %&gt;% 
-  broom::glance()</code></pre>
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:unnamed-chunk-44">
-<col><col><col><col><col><col><col><col><col><col><col><col><tr>
-<th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">r.squared</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">adj.r.squared</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">sigma</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">statistic</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">p.value</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">df</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">logLik</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">AIC</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">BIC</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">deviance</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">df.residual</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">nobs</th></tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">0.803</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;"></td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;"></td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;"></td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">-2.08e+04</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">4.15e+04</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">4.15e+04</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">1.12e+04</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">17300</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">17301</td></tr>
-</table>
-
-<pre class="r"><code># ***** Fit linear regression models: criminals on 3 explanatory variables.
+# ***** Fit linear regression model:
 model1 &lt;- lm(log (price_4_nights) ~ prop_type_simplified, data= listings)
 
 model1 %&gt;% 
@@ -2546,7 +2019,7 @@ nobs
 <div id="model-2-adding-room_type" class="section level3">
 <h3>Model 2: adding room_type</h3>
 <p>We want to determine if room_type is a significant predictor of the cost for 4 nights, while controlling for property_type.</p>
-<pre class="r"><code># ***** Fit linear regression models: criminals on 4 explanatory variables.
+<pre class="r"><code># ***** Fit linear regression model:
 model2 &lt;- lm(log (price_4_nights) ~ prop_type_simplified+room_type, data= listings)
 
 model2 %&gt;% 
@@ -3232,30 +2705,6 @@ nobs
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>msummary(model3)</code></pre>
-<pre><code>##                                        Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)                            8.086186   0.059485  135.94  &lt; 2e-16 ***
-## prop_type_simplifiedBed and breakfast  0.370880   0.045449    8.16  3.7e-16 ***
-## prop_type_simplifiedGuest suite       -0.292231   0.020649  -14.15  &lt; 2e-16 ***
-## prop_type_simplifiedHouse              0.355172   0.015492   22.93  &lt; 2e-16 ***
-## prop_type_simplifiedOther              0.088627   0.015832    5.60  2.2e-08 ***
-## prop_type_simplifiedVilla              1.352418   0.034981   38.66  &lt; 2e-16 ***
-## review_scores_rating                   0.003606   0.000626    5.76  8.5e-09 ***
-## room_typeHotel room                   -0.046734   0.049972   -0.94     0.35    
-## room_typePrivate room                 -0.759202   0.014878  -51.03  &lt; 2e-16 ***
-## room_typeShared room                  -1.223899   0.079842  -15.33  &lt; 2e-16 ***
-## 
-## Residual standard error: 0.622 on 12385 degrees of freedom
-##   (4906 observations deleted due to missingness)
-## Multiple R-squared:  0.278,  Adjusted R-squared:  0.278 
-## F-statistic:  531 on 9 and 12385 DF,  p-value: &lt;2e-16</code></pre>
-<pre class="r"><code>car::vif(model3)</code></pre>
-<pre><code>##                      GVIF Df GVIF^(1/(2*Df))
-## prop_type_simplified 1.36  5            1.03
-## review_scores_rating 1.01  1            1.01
-## room_type            1.36  3            1.05</code></pre>
-<pre class="r"><code>autoplot(model3)</code></pre>
-<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-46-1.png" width="648" style="display: block; margin: auto;" /></p>
 <p>Model was also tested without number_of_reviews. There was almost no change in the R2 so number_of_reviews was taken out of the model, as review_scores rating explains more od the variability.</p>
 </div>
 <div id="model-4-adding-accommodates-to-the-model" class="section level3">
@@ -5416,7 +4865,7 @@ huxreg(model1,model2, model3, model4, model5, model6, model7, model8,
        stars = NULL
 ) %&gt;%
   set_caption(&#39;Comparison of models&#39;)</code></pre>
-<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:unnamed-chunk-52">
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:unnamed-chunk-51">
 <caption style="caption-side: top; text-align: center;">Comparison of models</caption><col><col><col><col><col><col><col><col><col><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(1)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(2)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(3)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(4)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(5)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(6)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(7)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(8)</th></tr>
 <tr>
