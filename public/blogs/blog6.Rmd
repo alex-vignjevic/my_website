@@ -1,9 +1,9 @@
 ---
 title: "Covid-19 death rate across gender,age, time"
-date: '2020-19-07'
+date: '2020-09-20'
 description: CDC Covid-19 Data Analysis
 draft: no
-image: covid-19.png
+image: pic08.jpg
 keywords: ''
 slug: blog6
 categories:
@@ -122,11 +122,10 @@ significantly higher than for those without comorbidities. This effect is best s
 
 have comorbidities much more rarely. As expected, the death rate increases significantly with age.
 
-#  Death rate across gender, age and if the patient was admitted to Intensive care unit or not
+#  Death rate across gender, age and if the patient was admitted to Intensive care
 
 ```  {r}
 
-#first the data has to be filtered to exclude missing values. icu_yn refers to weather the patient was admitted to icu or not
 
 covid_death_rate_icu<-covid_data %>% 
   filter(sex %in% c('Male','Female'),!age_group %in% c('Unknown',NA),icu_yn %in% c('Yes','No'),

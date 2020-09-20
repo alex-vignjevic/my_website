@@ -1,9 +1,9 @@
 ---
 title: "Covid-19 death rate across gender,age, time"
-date: '2020-19-07'
+date: '2020-09-20'
 description: CDC Covid-19 Data Analysis
 draft: no
-image: covid-19.png
+image: pic08.jpg
 keywords: ''
 slug: blog6
 categories:
@@ -88,11 +88,9 @@ facet_grid(medcond_yn~sex,as.table=FALSE,labeller=labeller(medcond_yn=new_labels
 <p>significantly higher than for those without comorbidities. This effect is best seen for top age categories, as those in the lower age categories</p>
 <p>have comorbidities much more rarely. As expected, the death rate increases significantly with age.</p>
 </div>
-<div id="death-rate-across-gender-age-and-if-the-patient-was-admitted-to-intensive-care-unit-or-not" class="section level1">
-<h1>Death rate across gender, age and if the patient was admitted to Intensive care unit or not</h1>
-<pre class="r"><code>#first the data has to be filtered to exclude missing values. icu_yn refers to weather the patient was admitted to icu or not
-
-covid_death_rate_icu&lt;-covid_data %&gt;% 
+<div id="death-rate-across-gender-age-and-if-the-patient-was-admitted-to-intensive-care" class="section level1">
+<h1>Death rate across gender, age and if the patient was admitted to Intensive care</h1>
+<pre class="r"><code>covid_death_rate_icu&lt;-covid_data %&gt;% 
   filter(sex %in% c(&#39;Male&#39;,&#39;Female&#39;),!age_group %in% c(&#39;Unknown&#39;,NA),icu_yn %in% c(&#39;Yes&#39;,&#39;No&#39;),
   death_yn %in% c(&#39;Yes&#39;,&#39;No&#39;)) %&gt;% 
   

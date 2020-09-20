@@ -122,44 +122,44 @@ glimpse(nyt_mask_survey)</code></pre>
 # The id field is the FIPS code for the county
 county_map %&gt;% 
   sample_n(5)</code></pre>
-<pre><code>##       long      lat  order  hole piece            group    id
-## 1 -1468004 -2379889   4384 FALSE     1 0500000US02013.1 02013
-## 2   503047  -709498 100947 FALSE     1 0500000US29037.1 29037
-## 3   867128 -1095618  99082 FALSE     1 0500000US28143.1 28143
-## 4  1696451 -1285631  46583 FALSE     1 0500000US13305.1 13305
-## 5   214912 -1561299 165701 FALSE     1 0500000US48491.1 48491</code></pre>
+<pre><code>##      long      lat  order  hole piece            group    id
+## 1  599736   -32596  92045 FALSE     1 0500000US27049.1 27049
+## 2  808727 -1441590  96012 FALSE     1 0500000US28001.1 28001
+## 3 2224804   -76651 120391 FALSE     1 0500000US36103.1 36103
+## 4 1770232 -1045038 144001 FALSE     1 0500000US45017.1 45017
+## 5  922840   155707  86585 FALSE     1 0500000US26043.1 26043</code></pre>
 <pre class="r"><code>county_data %&gt;%
     sample_n(5)</code></pre>
-<pre><code>##      id            name state census_region      pop_dens   pop_dens4
-## 1 26157  Tuscola County    MI       Midwest [   50,  100) [ 45,  118)
-## 2 35061 Valencia County    NM          West [   50,  100) [ 45,  118)
-## 3 36019  Clinton County    NY     Northeast [   50,  100) [ 45,  118)
-## 4 29013    Bates County    MO       Midwest [   10,   50) [ 17,   45)
-## 5 40037    Creek County    OK         South [   50,  100) [ 45,  118)
-##     pop_dens6   pct_black   pop female white black travel_time land_area
-## 1 [ 45,   82) [ 0.0, 2.0) 54000   49.8  96.7   1.2        30.2       803
-## 2 [ 45,   82) [ 0.0, 2.0) 75817   49.7  89.8   1.6        29.1      1066
-## 3 [ 45,   82) [ 2.0, 5.0) 81632   48.8  92.7   4.2        20.2      1038
-## 4 [  9,   25) [ 0.0, 2.0) 16584   50.7  96.6   1.1        28.5       837
-## 5 [ 45,   82) [ 2.0, 5.0) 70632   50.6  80.2   2.4        24.1       950
+<pre><code>##      id             name state census_region      pop_dens   pop_dens4
+## 1 36029      Erie County    NY     Northeast [  500, 1000) [118,71672]
+## 2 16067  Minidoka County    ID          West [   10,   50) [ 17,   45)
+## 3 26113 Missaukee County    MI       Midwest [   10,   50) [ 17,   45)
+## 4 01055    Etowah County    AL         South [  100,  500) [118,71672]
+## 5 27137 St. Louis County    MN       Midwest [   10,   50) [ 17,   45)
+##     pop_dens6   pct_black    pop female white black travel_time land_area
+## 1 [215,71672] [10.0,15.0) 922835   51.6  80.7  13.9        20.9      1043
+## 2 [ 25,   45) [ 0.0, 2.0)  20323   49.6  94.7   0.7        16.1       758
+## 3 [ 25,   45) [ 0.0, 2.0)  15037   49.2  97.0   0.4        23.1       565
+## 4 [ 82,  215) [15.0,25.0) 103531   51.5  81.3  15.5        23.9       535
+## 5 [ 25,   45) [ 0.0, 2.0) 200949   49.8  92.9   1.5        19.5      6247
 ##   hh_income su_gun4 su_gun6  fips votes_dem_2016 votes_gop_2016
-## 1     43039 [ 5, 8) [ 7, 8) 26157           7493          17421
-## 2     42506 [ 8,11) [10,12) 35061          10810          13175
-## 3     50282 [ 5, 8) [ 4, 7) 36019          13446          13181
-## 4     38579 [ 8,11) [ 8,10) 29013           1617           6000
-## 5     43026 [11,54] [12,54] 40037           5834          21539
+## 1     50653 [ 0, 5) [ 0, 4) 36029         192065         173817
+## 2     43266 [ 8,11) [10,12) 16067           1167           4887
+## 3     41061 [ 8,11) [10,12) 26113           1565           5386
+## 4     38013 [ 8,11) [10,12)  1055          10350          32132
+## 5     46517 [ 5, 8) [ 7, 8) 27137          57769          44631
 ##   total_votes_2016 per_dem_2016 per_gop_2016 diff_2016 per_dem_2012
-## 1            26157        0.286        0.666      9928        0.440
-## 2            27350        0.395        0.482      2365        0.487
-## 3            28378        0.474        0.464       265        0.620
-## 4             8021        0.202        0.748      4383        0.329
-## 5            28786        0.203        0.748     15705        0.273
+## 1           383248        0.501        0.454     18248        0.569
+## 2             6870        0.170        0.711      3720        0.199
+## 3             7301        0.214        0.738      3821        0.324
+## 4            43474        0.238        0.739     21782        0.301
+## 5           111260        0.519        0.401     13138        0.637
 ##   per_gop_2012 diff_2012  winner partywinner16 winner12 partywinner12 flipped
-## 1        0.548      2874   Trump    Republican   Romney    Republican      No
-## 2        0.463       685   Trump    Republican    Obama      Democrat     Yes
-## 3        0.364      7069 Clinton      Democrat    Obama      Democrat      No
-## 4        0.646      2463   Trump    Republican   Romney    Republican      No
-## 5        0.727     11850   Trump    Republican   Romney    Republican      No</code></pre>
+## 1        0.413     60506 Clinton      Democrat    Obama      Democrat      No
+## 2        0.780      4052   Trump    Republican   Romney    Republican      No
+## 3        0.664      2391   Trump    Republican   Romney    Republican      No
+## 4        0.685     16310   Trump    Republican   Romney    Republican      No
+## 5        0.341     34502 Clinton      Democrat    Obama      Democrat      No</code></pre>
 <pre class="r"><code>glimpse(county_data)</code></pre>
 <pre><code>## Rows: 3,195
 ## Columns: 32

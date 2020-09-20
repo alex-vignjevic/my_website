@@ -1,10 +1,10 @@
 ---
 title: "Exploring pay difference between genders in Omega"
-date: '2020-19-07'
-description: 
+date: '2020-09-20'
+description: What does the data say?
 draft: no
-image: pic20.jpg
-keywords: ''
+image: pic11.jpg
+keywords: 
 slug: blog8
 categories:
 - ''
@@ -46,7 +46,7 @@ library(data.table)
 library(modelr)
 library(infer)
 library(scales)
-library(ggforce)
+
 ```
 
 
@@ -139,7 +139,9 @@ At the board meeting, someone raised the issue that there was indeed a substanti
 
 ```{r, experience_stats}
 # Summary Statistics of salary by gender
-favstats (experience ~ gender, data=omega)
+favstats (experience ~ gender, data=omega) %>% 
+  kable()%>%
+kable_styling()
 
 ```
 

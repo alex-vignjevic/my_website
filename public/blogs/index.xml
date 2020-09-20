@@ -12,15 +12,33 @@
     
     
     <item>
-      <title>Airbnb data analysis of Cape Town</title>
-      <link>/blogs/blog7/</link>
+      <title>Analysis of Rentals</title>
+      <link>/blogs/blog9/</link>
       <pubDate>Sun, 20 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>/blogs/blog7/</guid>
-      <description>Executive SummaryThis analysis uses Airbnb data to predict the price of an airbnb for two people for 4 nights in Cape Town.
-First, the data is cleaned and the variables are put into right format.
-Second, the variables of interest are examined further and informative graphs and tables are provided.
-Third, the regression model for price prediction is created and examined.</description>
+      <guid>/blogs/blog9/</guid>
+      <description>Challenge 2: Excess rentals in TfL bike sharingRecall the TfL data on how many bikes were hired every single day. We can get the latest data by running the following
+url &amp;lt;- &amp;quot;https://data.london.gov.uk/download/number-bicycle-hires/ac29363e-e0cb-47cc-a97a-e216d900a6b0/tfl-daily-cycle-hires.xlsx&amp;quot;# Download TFL data to temporary filehttr::GET(url, write_disk(bike.temp &amp;lt;- tempfile(fileext = &amp;quot;.xlsx&amp;quot;)))## Response [https://airdrive-secure.s3-eu-west-1.amazonaws.com/london/dataset/number-bicycle-hires/2020-09-18T09%3A06%3A54/tfl-daily-cycle-hires.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;amp;X-Amz-Credential=AKIAJJDIMAIVZJDICKHA%2F20200920%2Feu-west-1%2Fs3%2Faws4_request&amp;amp;X-Amz-Date=20200920T153323Z&amp;amp;X-Amz-Expires=300&amp;amp;X-Amz-Signature=097e933b072f62a10b7bacd930c1e4835a60130fd8544e30b8c08a9cdb080435&amp;amp;X-Amz-SignedHeaders=host]## Date: 2020-09-20 15:33## Status: 200## Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet## Size: 165 kB## &amp;lt;ON DISK&amp;gt; C:\Users\vignj\AppData\Local\Temp\Rtmp2JMwWg\file43d817f52d5f.xlsx# Use read_excel to read it as dataframebike0 &amp;lt;- read_excel(bike.</description>
+    </item>
+    
+    <item>
+      <title>Covid-19 death rate across gender,age, time</title>
+      <link>/blogs/blog6/</link>
+      <pubDate>Sun, 20 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blogs/blog6/</guid>
+      <description>CDC COVID-19 Public Use DataThe data used throughout the analysis can be found at the link below:
+(https://data.cdc.gov/Case-Surveillance/COVID-19-Case-Surveillance-Public-Use-Data/vbim-akqf).
+# The data is loaded and the direct link can be found belowurl &amp;lt;- &amp;quot;https://data.cdc.gov/api/views/vbim-akqf/rows.csv?accessType=DOWNLOAD&amp;quot;covid_data &amp;lt;- vroom(url)%&amp;gt;%clean_names()#Inspecting dataglimpse(covid_data)## Rows: 3,662,325## Columns: 11## $ cdc_report_dt &amp;lt;date&amp;gt; 2020-03-03, 2020-03-03, 2020-04-07, 20...## $ pos_spec_dt &amp;lt;date&amp;gt; 2020-03-03, 2020-03-03, 2020-03-03, 20...## $ onset_dt &amp;lt;date&amp;gt; NA, NA, 2020-03-03, NA, 2020-07-28, 20.</description>
+    </item>
+    
+    <item>
+      <title>Exploring pay difference between genders in Omega</title>
+      <link>/blogs/blog8/</link>
+      <pubDate>Sun, 20 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blogs/blog8/</guid>
+      <description>Omega Group plc- Pay DiscriminationAt the board meeting of Omega Group Plc., the issue was raised that women were being discriminated in the company, in the sense that the salaries were not the same for male and female executives. A quick analysis of a sample of 50 employees (of which 24 men and 26 women) revealed that the average salary for men was about 8,700 higher than for women.</description>
     </item>
     
     <item>
@@ -70,23 +88,15 @@ Third, the regression model for price prediction is created and examined.</descr
     </item>
     
     <item>
-      <title>Covid-19 death rate across gender,age, time</title>
-      <link>/blogs/blog6/</link>
+      <title>Airbnb data analysis of Cape Town</title>
+      <link>/blogs/blog7/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/blogs/blog6/</guid>
-      <description>CDC COVID-19 Public Use DataThe data used throughout the analysis can be found at the link below:
-(https://data.cdc.gov/Case-Surveillance/COVID-19-Case-Surveillance-Public-Use-Data/vbim-akqf).
-# The data is loaded and the direct link can be found belowurl &amp;lt;- &amp;quot;https://data.cdc.gov/api/views/vbim-akqf/rows.csv?accessType=DOWNLOAD&amp;quot;covid_data &amp;lt;- vroom(url)%&amp;gt;%clean_names()#Inspecting dataglimpse(covid_data)## Rows: 3,662,325## Columns: 11## $ cdc_report_dt &amp;lt;date&amp;gt; 2020-03-03, 2020-03-03, 2020-04-07, 20...## $ pos_spec_dt &amp;lt;date&amp;gt; 2020-03-03, 2020-03-03, 2020-03-03, 20...## $ onset_dt &amp;lt;date&amp;gt; NA, NA, 2020-03-03, NA, 2020-07-28, 20.</description>
-    </item>
-    
-    <item>
-      <title>Exploring pay difference between genders in Omega</title>
-      <link>/blogs/blog8/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/blogs/blog8/</guid>
-      <description>Omega Group plc- Pay DiscriminationAt the board meeting of Omega Group Plc., the issue was raised that women were being discriminated in the company, in the sense that the salaries were not the same for male and female executives. A quick analysis of a sample of 50 employees (of which 24 men and 26 women) revealed that the average salary for men was about 8,700 higher than for women.</description>
+      <guid>/blogs/blog7/</guid>
+      <description>Executive SummaryThis analysis uses Airbnb data to predict the price of an airbnb for two people for 4 nights in Cape Town.
+First, the data is cleaned and the variables are put into right format.
+Second, the variables of interest are examined further and informative graphs and tables are provided.
+Third, the regression model for price prediction is created and examined.</description>
     </item>
     
   </channel>
