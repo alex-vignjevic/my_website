@@ -106,7 +106,7 @@ disqusShortname = ""
     [[params.tiles.showcase]]
       title = "Airbnb data analysis"
       subtitle = "Cape Town"
-      image = "pic03.jpg"
+      image = "pic19.jpg"
       url = "blogs/blog7"
 
     #[[params.tiles.showcase]]

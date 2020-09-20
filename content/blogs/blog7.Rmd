@@ -3,7 +3,7 @@ title: "Airbnb data analysis of Cape Town"
 date: '2020-19-07'
 description: What determines the price of an Airbnb in Cape Town?
 draft: no
-image: pic07.jpg
+image: pic18.jpg
 keywords: ''
 slug: blog7
 categories:
