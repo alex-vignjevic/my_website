@@ -80,5 +80,14 @@ Third, the regression model for price prediction is created and examined.</descr
 # The data is loaded and the direct link can be found belowurl &amp;lt;- &amp;quot;https://data.cdc.gov/api/views/vbim-akqf/rows.csv?accessType=DOWNLOAD&amp;quot;covid_data &amp;lt;- vroom(url)%&amp;gt;%clean_names()#Inspecting dataglimpse(covid_data)## Rows: 3,662,325## Columns: 11## $ cdc_report_dt &amp;lt;date&amp;gt; 2020-03-03, 2020-03-03, 2020-04-07, 20...## $ pos_spec_dt &amp;lt;date&amp;gt; 2020-03-03, 2020-03-03, 2020-03-03, 20...## $ onset_dt &amp;lt;date&amp;gt; NA, NA, 2020-03-03, NA, 2020-07-28, 20.</description>
     </item>
     
+    <item>
+      <title>Exploring pay difference between genders in Omega</title>
+      <link>/blogs/blog7/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/blogs/blog7/</guid>
+      <description>Omega Group plc- Pay DiscriminationAt the board meeting of Omega Group Plc., the issue was raised that women were being discriminated in the company, in the sense that the salaries were not the same for male and female executives. A quick analysis of a sample of 50 employees (of which 24 men and 26 women) revealed that the average salary for men was about 8,700 higher than for women.</description>
+    </item>
+    
   </channel>
 </rss>

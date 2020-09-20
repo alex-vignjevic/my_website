@@ -91,11 +91,11 @@ disqusShortname = ""
     enable = true
     # Display your showcases here.
     
-    [[params.tiles.showcase]]
-      title = "NYT Masks"
-      subtitle = "HOW DOES MASK USE ACCEPTANCE VARY IN THE US?"
-      image = "pic07.jpg"
-      url = "blogs/blog5"
+    #[[params.tiles.showcase]]
+      #title = "NYT Masks"
+      #subtitle = "HOW DOES MASK USE ACCEPTANCE VARY IN THE US?"
+     # image = "pic07.jpg"
+     # url = "blogs/blog5"
 
     [[params.tiles.showcase]]
       title = "Covid-19"
@@ -108,6 +108,12 @@ disqusShortname = ""
       subtitle = "Cape Town"
       image = "pic19.jpg"
       url = "blogs/blog7"
+      
+    [[params.tiles.showcase]]
+      title = "Omega Gender (In)Equality"
+      subtitle = "Why you should not base your opinion solely on average"
+      image = "pic21.jpg"
+      url = "blogs/blog8"
 
     #[[params.tiles.showcase]]
       #title = "Ipsum"

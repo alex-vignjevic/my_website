@@ -441,7 +441,7 @@ The distribution is heavily left-skewed with most of the ratings in the 90's. Th
 
 The following variables are reviews for individual categories. They all exhibit very similar distributions to review_scores_rating and between each-other. They therefore won't be added to the models.
 
-```{r}
+```{r,echo=FALSE}
 accuracy<-listings%>%
   ggplot(aes(x=review_scores_accuracy)) +
   geom_bar(width = 0.5, color = "blue", fill="#77a5f0") +
