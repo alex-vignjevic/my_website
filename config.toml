@@ -112,7 +112,7 @@ disqusShortname = ""
     [[params.tiles.showcase]]
       title = "Omega Gender (In)Equality"
       subtitle = "Why you should not base your opinion solely on average"
-      image = "pic21.jpg"
+      image = "pic22.jpg"
       url = "blogs/blog8"
 
     #[[params.tiles.showcase]]

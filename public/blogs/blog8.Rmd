@@ -5,7 +5,7 @@ description:
 draft: no
 image: pic20.jpg
 keywords: ''
-slug: blog7
+slug: blog8
 categories:
 - ''
 - ''
