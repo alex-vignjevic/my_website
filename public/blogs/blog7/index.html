@@ -2771,30 +2771,6 @@ nobs
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>msummary(model3)</code></pre>
-<pre><code>##                                        Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)                            8.086186   0.059485  135.94  &lt; 2e-16 ***
-## prop_type_simplifiedBed and breakfast  0.370880   0.045449    8.16  3.7e-16 ***
-## prop_type_simplifiedGuest suite       -0.292231   0.020649  -14.15  &lt; 2e-16 ***
-## prop_type_simplifiedHouse              0.355172   0.015492   22.93  &lt; 2e-16 ***
-## prop_type_simplifiedOther              0.088627   0.015832    5.60  2.2e-08 ***
-## prop_type_simplifiedVilla              1.352418   0.034981   38.66  &lt; 2e-16 ***
-## review_scores_rating                   0.003606   0.000626    5.76  8.5e-09 ***
-## room_typeHotel room                   -0.046734   0.049972   -0.94     0.35    
-## room_typePrivate room                 -0.759202   0.014878  -51.03  &lt; 2e-16 ***
-## room_typeShared room                  -1.223899   0.079842  -15.33  &lt; 2e-16 ***
-## 
-## Residual standard error: 0.622 on 12385 degrees of freedom
-##   (4906 observations deleted due to missingness)
-## Multiple R-squared:  0.278,  Adjusted R-squared:  0.278 
-## F-statistic:  531 on 9 and 12385 DF,  p-value: &lt;2e-16</code></pre>
-<pre class="r"><code>car::vif(model3)</code></pre>
-<pre><code>##                      GVIF Df GVIF^(1/(2*Df))
-## prop_type_simplified 1.36  5            1.03
-## review_scores_rating 1.01  1            1.01
-## room_type            1.36  3            1.05</code></pre>
-<pre class="r"><code>autoplot(model3)</code></pre>
-<p><img src="/blogs/blog7_files/figure-html/unnamed-chunk-46-1.png" width="648" style="display: block; margin: auto;" /></p>
 <p>Model was also tested without number_of_reviews. There was almost no change in the R2 so number_of_reviews was taken out of the model, as review_scores rating explains more od the variability.</p>
 </div>
 <div id="model-4-adding-accommodates-to-the-model" class="section level3">

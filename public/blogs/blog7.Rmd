@@ -750,9 +750,7 @@ model3 %>%
   kable()%>%
   kable_styling()
 
-msummary(model3)
-car::vif(model3)
-autoplot(model3)
+
 ```
 
 Model was also tested without number_of_reviews. There was almost no change in the R2 so number_of_reviews was taken out of the model, as review_scores rating explains more od the variability.
