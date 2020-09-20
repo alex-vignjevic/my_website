@@ -3,7 +3,7 @@ title: "Covid-19 death rate across gender,age, time"
 date: '2020-09-20'
 description: CDC Covid-19 Data Analysis
 draft: no
-image: pic08.jpg
+image: pic34.jpg
 keywords: ''
 slug: blog6
 categories:

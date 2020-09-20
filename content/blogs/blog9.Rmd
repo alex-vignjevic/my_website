@@ -41,9 +41,9 @@ library(vroom)
 library(scales)
 ```
 
-# Challenge 2: Excess rentals in TfL bike sharing
+# Download data
 
-Recall the TfL data on how many bikes were hired every single day. We can get the latest data by running the following
+Data on tfl bikes hired is downloaded
 
 ```{r, get_tfl_data}
 url <- "https://data.london.gov.uk/download/number-bicycle-hires/ac29363e-e0cb-47cc-a97a-e216d900a6b0/tfl-daily-cycle-hires.xlsx"
@@ -55,10 +55,12 @@ httr::GET(url, write_disk(bike.temp <- tempfile(fileext = ".xlsx")))
 bike0 <- read_excel(bike.temp,
                    sheet = "Data",
                    range = cell_cols("A:B"))
+
+
 ```
 
 ```{r}
-# change dates to get year, month, and week
+# we want to extract year,day & month from the YMD day format
 bike <- bike0 %>% 
   clean_names() %>% 
   rename (bikes_hired = number_of_bicycle_hires) %>% 
@@ -66,15 +68,19 @@ bike <- bike0 %>%
           month = lubridate::month(day, label = TRUE),
           week = isoweek(day))
 
+# since we are only interested in average rental of bikes per month for the period 2015-2020 we filter and group in the following way
 bike_filtered <- bike %>%
                   filter(year %in% c(2015: 2020)) %>%
                   group_by(year, month) %>%
                   summarise(avgMonth=mean(bikes_hired))
 
+# now we group by month to find average number of bikes hired per month over the course of four years
+
 bike_monthly_average <- bike_filtered %>%
                   filter(year %in% c(2015: 2019)) %>%
                   group_by(month) %>%
                   summarise(year_avgMonth=mean(avgMonth))
+
 
 # Change month to numeric
 bike_filtered$month <- as.numeric(bike_filtered$month)
@@ -82,19 +88,26 @@ bike_filtered$month <- as.numeric(bike_filtered$month)
 # Change month to numeric
 bike_monthly_average$month <- as.numeric(bike_monthly_average$month)
 
+# now we join the two tables as we need them sorted in this way for analysis
 
 bike_left_join_1 <-left_join(bike_filtered,bike_monthly_average, by="month")
+
+
+# finally we find the difference between the average number of bikes hired per month across 2015-2019 and the average number of bikes hired per month in each individual year
 
 bike_left_join_2 <- bike_left_join_1 %>%
   mutate(diff_month = avgMonth-year_avgMonth)
 
 
 bike_left_join_2
+
+
 ```
 
 
+Next we plot the graph to see whether the average number of bikes hired per month in any given year is higher or lower than the four year monthly average for the month in question.
 
-We can easily create a facet grid that plots bikes hired by month and year.
+(For example monthly average for Jan 2015 vs average of the monthly averages for Jan 2015, Jan 2016, Jan 2017, Jan2018, Jan 2019)
 
 
 ```{r }
@@ -117,55 +130,4 @@ labs(x=NULL, y="Bike Rentals", caption="Source: TfL, London Data Store", title="
 
 ```
 
-
-The second one looks at percentage changes from the expected level of weekly rentals. The two grey shaded rectangles correspond to the second (weeks 14-26) and fourth (weeks 40-52) quarters.
-
-
-For both of these graphs, we calculate the expected number of rentals per week or month between 2015-2019 and then, see how each week/month of 2020 compares to the expected rentals. More specifically, we use the calculation `excess_rentals = actual_rentals - expected_rentals`. 
-
-We used means as expected rentals as the data is approximaately normally distributed.
-
-```{r}
-
-bike_filtered_week <- bike %>%
-                  filter(year %in% c(2015: 2020)) %>%
-                  group_by(year, week) %>%
-                  summarise(avgWeek_filtered_week=mean(bikes_hired))
-
-bike_weekly_average <- bike_filtered_week %>%
-                  filter(year %in% c(2015: 2019)) %>%
-                  group_by(week) %>%
-                  summarise(avgWeek_weekly_average=mean(avgWeek_filtered_week)) 
-
-bike_joined_full <- left_join(bike_filtered_week, bike_weekly_average, by = "week")
-
-
-bike_joined_full_2 <- bike_joined_full %>%
-  mutate(excessrentalspercent = (avgWeek_filtered_week - avgWeek_weekly_average)*100/avgWeek_weekly_average) 
-
-```
- Finally, we produce the plots.
-```{r}
-ggplot(bike_joined_full_2, aes(x=week, y=excessrentalspercent)) + 
-  labs(title= "Weekly Changes in TFL Bike Rentals", subtitle=" % changes from weekly averages calculated between 2015-2019", x="week", y=NULL, caption="Source: TfL, London Data Store") +
-  facet_wrap(~year)+ geom_line(fill="black") +
-  theme_minimal() +
-  geom_ribbon(aes(ymin = excessrentalspercent - if_else(excessrentalspercent < 0, excessrentalspercent, 0),
-                  ymax = excessrentalspercent), color ="grey", fill = "red", alpha = 0.3) +
-  geom_ribbon(aes(ymin = excessrentalspercent,
-                  ymax = excessrentalspercent - if_else(excessrentalspercent > 0, excessrentalspercent, 0)),color ="grey", fill = "green", alpha = 0.3) + 
-   scale_x_discrete(limits = c(13, 26, 39, 53)) +
-  geom_rect(xmin=13, xmax=26, ymin=-150, ymax=150, fill="grey", alpha=0.01) +geom_rect(xmin=39, xmax=52,ymin=-150, ymax=150,
-                                                                                          fill="grey", alpha=0.01) +
-  geom_rug(sides="b", aes(colour=ifelse(excessrentalspercent > 0, "red", "green")), alpha=0.2) +
-  theme(legend.position='none') +
-  scale_y_continuous(labels = function(x) paste0(x, "%"))
-```
-
-# Details
-
-- Who did you collaborate with: Keshav, Ilana, Julia, Jasper, Aleksander, Xiyi
-- Approximately how much time did you spend on this problem set: 10-15 hours
-- What, if anything, gave you the most trouble: Knitting
-
-
+The plot shows us that over time the usage of bikes hired per month has overall increased. The highest drop was during the lockdown in 2020 as can be seen in the plot.

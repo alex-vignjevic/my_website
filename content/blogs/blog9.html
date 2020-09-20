@@ -13,24 +13,24 @@ categories:
 
 
 
-<div id="challenge-2-excess-rentals-in-tfl-bike-sharing" class="section level1">
-<h1>Challenge 2: Excess rentals in TfL bike sharing</h1>
-<p>Recall the TfL data on how many bikes were hired every single day. We can get the latest data by running the following</p>
+<div id="download-data" class="section level1">
+<h1>Download data</h1>
+<p>Data on tfl bikes hired is downloaded</p>
 <pre class="r"><code>url &lt;- &quot;https://data.london.gov.uk/download/number-bicycle-hires/ac29363e-e0cb-47cc-a97a-e216d900a6b0/tfl-daily-cycle-hires.xlsx&quot;
 
 # Download TFL data to temporary file
 httr::GET(url, write_disk(bike.temp &lt;- tempfile(fileext = &quot;.xlsx&quot;)))</code></pre>
-<pre><code>## Response [https://airdrive-secure.s3-eu-west-1.amazonaws.com/london/dataset/number-bicycle-hires/2020-09-18T09%3A06%3A54/tfl-daily-cycle-hires.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAJJDIMAIVZJDICKHA%2F20200920%2Feu-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20200920T153323Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=097e933b072f62a10b7bacd930c1e4835a60130fd8544e30b8c08a9cdb080435&amp;X-Amz-SignedHeaders=host]
-##   Date: 2020-09-20 15:33
+<pre><code>## Response [https://airdrive-secure.s3-eu-west-1.amazonaws.com/london/dataset/number-bicycle-hires/2020-09-18T09%3A06%3A54/tfl-daily-cycle-hires.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAJJDIMAIVZJDICKHA%2F20200920%2Feu-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20200920T173305Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=16db4bcc7dba9b2dce897f5c4492289c00ae0c082b45ef73b9c319c1d7e0013a&amp;X-Amz-SignedHeaders=host]
+##   Date: 2020-09-20 17:33
 ##   Status: 200
 ##   Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
 ##   Size: 165 kB
-## &lt;ON DISK&gt;  C:\Users\vignj\AppData\Local\Temp\Rtmp2JMwWg\file43d817f52d5f.xlsx</code></pre>
+## &lt;ON DISK&gt;  C:\Users\vignj\AppData\Local\Temp\RtmpioRaDO\file5284ab51d57.xlsx</code></pre>
 <pre class="r"><code># Use read_excel to read it as dataframe
 bike0 &lt;- read_excel(bike.temp,
                    sheet = &quot;Data&quot;,
                    range = cell_cols(&quot;A:B&quot;))</code></pre>
-<pre class="r"><code># change dates to get year, month, and week
+<pre class="r"><code># we want to extract year,day &amp; month from the YMD day format
 bike &lt;- bike0 %&gt;% 
   clean_names() %&gt;% 
   rename (bikes_hired = number_of_bicycle_hires) %&gt;% 
@@ -38,15 +38,19 @@ bike &lt;- bike0 %&gt;%
           month = lubridate::month(day, label = TRUE),
           week = isoweek(day))
 
+# since we are only interested in average rental of bikes per month for the period 2015-2020 we filter and group in the following way
 bike_filtered &lt;- bike %&gt;%
                   filter(year %in% c(2015: 2020)) %&gt;%
                   group_by(year, month) %&gt;%
                   summarise(avgMonth=mean(bikes_hired))
 
+# now we group by month to find average number of bikes hired per month over the course of four years
+
 bike_monthly_average &lt;- bike_filtered %&gt;%
                   filter(year %in% c(2015: 2019)) %&gt;%
                   group_by(month) %&gt;%
                   summarise(year_avgMonth=mean(avgMonth))
+
 
 # Change month to numeric
 bike_filtered$month &lt;- as.numeric(bike_filtered$month)
@@ -54,8 +58,12 @@ bike_filtered$month &lt;- as.numeric(bike_filtered$month)
 # Change month to numeric
 bike_monthly_average$month &lt;- as.numeric(bike_monthly_average$month)
 
+# now we join the two tables as we need them sorted in this way for analysis
 
 bike_left_join_1 &lt;-left_join(bike_filtered,bike_monthly_average, by=&quot;month&quot;)
+
+
+# finally we find the difference between the average number of bikes hired per month across 2015-2019 and the average number of bikes hired per month in each individual year
 
 bike_left_join_2 &lt;- bike_left_join_1 %&gt;%
   mutate(diff_month = avgMonth-year_avgMonth)
@@ -77,7 +85,8 @@ bike_left_join_2</code></pre>
 ##  9  2015     9   30114.        32433.     -2319.
 ## 10  2015    10   28560.        29900.     -1339.
 ## # ... with 58 more rows</code></pre>
-<p>We can easily create a facet grid that plots bikes hired by month and year.</p>
+<p>Next we plot the graph to see whether the average number of bikes hired per month in any given year is higher or lower than the four year monthly average for the month in question.</p>
+<p>(For example monthly average for Jan 2015 vs average of the monthly averages for Jan 2015, Jan 2016, Jan 2017, Jan2018, Jan 2019)</p>
 <pre class="r"><code>bike_left_join_2$month &lt;- as.numeric(bike_left_join_2$month)
 bike_left_join_2$month &lt;- as.factor(bike_left_join_2$month)
 
@@ -91,46 +100,5 @@ labs(x=NULL, y=&quot;Bike Rentals&quot;, caption=&quot;Source: TfL, London Data 
                   ymax = year_avgMonth + if_else(diff_month &gt; 0, diff_month, 0)),color =&quot;grey&quot;, fill = &quot;green&quot;, alpha = 0.3)+ theme(aspect.ratio=0.5) + theme(axis.text.x= element_text(size=5)) +
   scale_x_discrete(labels=c(&quot;Jan&quot;, &quot;Feb&quot;, &quot;Mar&quot;, &quot;Apr&quot;, &quot;May&quot;, &quot;Jun&quot;, &quot;Jul&quot;, &quot;Aug&quot;, &quot;Sep&quot;, &quot;Oct&quot;, &quot;Nov&quot;, &quot;Dec&quot;))+ geom_line(color=&quot;blue&quot;)</code></pre>
 <p><img src="/blogs/blog9_files/figure-html/unnamed-chunk-2-1.png" width="648" style="display: block; margin: auto;" /></p>
-<p>The second one looks at percentage changes from the expected level of weekly rentals. The two grey shaded rectangles correspond to the second (weeks 14-26) and fourth (weeks 40-52) quarters.</p>
-<p>For both of these graphs, we calculate the expected number of rentals per week or month between 2015-2019 and then, see how each week/month of 2020 compares to the expected rentals. More specifically, we use the calculation <code>excess_rentals = actual_rentals - expected_rentals</code>.</p>
-<p>We used means as expected rentals as the data is approximaately normally distributed.</p>
-<pre class="r"><code>bike_filtered_week &lt;- bike %&gt;%
-                  filter(year %in% c(2015: 2020)) %&gt;%
-                  group_by(year, week) %&gt;%
-                  summarise(avgWeek_filtered_week=mean(bikes_hired))
-
-bike_weekly_average &lt;- bike_filtered_week %&gt;%
-                  filter(year %in% c(2015: 2019)) %&gt;%
-                  group_by(week) %&gt;%
-                  summarise(avgWeek_weekly_average=mean(avgWeek_filtered_week)) 
-
-bike_joined_full &lt;- left_join(bike_filtered_week, bike_weekly_average, by = &quot;week&quot;)
-
-
-bike_joined_full_2 &lt;- bike_joined_full %&gt;%
-  mutate(excessrentalspercent = (avgWeek_filtered_week - avgWeek_weekly_average)*100/avgWeek_weekly_average) </code></pre>
-<p>Finally, we produce the plots.</p>
-<pre class="r"><code>ggplot(bike_joined_full_2, aes(x=week, y=excessrentalspercent)) + 
-  labs(title= &quot;Weekly Changes in TFL Bike Rentals&quot;, subtitle=&quot; % changes from weekly averages calculated between 2015-2019&quot;, x=&quot;week&quot;, y=NULL, caption=&quot;Source: TfL, London Data Store&quot;) +
-  facet_wrap(~year)+ geom_line(fill=&quot;black&quot;) +
-  theme_minimal() +
-  geom_ribbon(aes(ymin = excessrentalspercent - if_else(excessrentalspercent &lt; 0, excessrentalspercent, 0),
-                  ymax = excessrentalspercent), color =&quot;grey&quot;, fill = &quot;red&quot;, alpha = 0.3) +
-  geom_ribbon(aes(ymin = excessrentalspercent,
-                  ymax = excessrentalspercent - if_else(excessrentalspercent &gt; 0, excessrentalspercent, 0)),color =&quot;grey&quot;, fill = &quot;green&quot;, alpha = 0.3) + 
-   scale_x_discrete(limits = c(13, 26, 39, 53)) +
-  geom_rect(xmin=13, xmax=26, ymin=-150, ymax=150, fill=&quot;grey&quot;, alpha=0.01) +geom_rect(xmin=39, xmax=52,ymin=-150, ymax=150,
-                                                                                          fill=&quot;grey&quot;, alpha=0.01) +
-  geom_rug(sides=&quot;b&quot;, aes(colour=ifelse(excessrentalspercent &gt; 0, &quot;red&quot;, &quot;green&quot;)), alpha=0.2) +
-  theme(legend.position=&#39;none&#39;) +
-  scale_y_continuous(labels = function(x) paste0(x, &quot;%&quot;))</code></pre>
-<p><img src="/blogs/blog9_files/figure-html/unnamed-chunk-4-1.png" width="648" style="display: block; margin: auto;" /></p>
-</div>
-<div id="details" class="section level1">
-<h1>Details</h1>
-<ul>
-<li>Who did you collaborate with: Keshav, Ilana, Julia, Jasper, Aleksander, Xiyi</li>
-<li>Approximately how much time did you spend on this problem set: 10-15 hours</li>
-<li>What, if anything, gave you the most trouble: Knitting</li>
-</ul>
+<p>The plot shows us that over time the usage of bikes hired per month has overall increased. The highest drop was during the lockdown in 2020 as can be seen in the plot.</p>
 </div>

@@ -80,7 +80,9 @@ We calculate summary statistics on salary by gender. Also, we create and print a
 
 ```{r, confint_single_valiables}
 # Summary Statistics of salary by gender
-mosaic::favstats (salary ~ gender, data=omega)
+mosaic::favstats (salary ~ gender, data=omega) %>% 
+      kable()%>%
+kable_styling()
 
 # Dataframe with two rows (male-female) and having as columns gender, mean, SD, sample size, 
 # the t-critical value, the standard error, the margin of error, 
@@ -114,7 +116,9 @@ set.seed(1234)
 obs_diff<-omega%>%
   specify(salary~gender)%>%
   calculate(stat="diff in means", order=c("male","female"))
-obs_diff
+obs_diff %>% 
+      kable()%>%
+kable_styling()
 
 salary_null <- omega %>%
   specify(salary~gender) %>%
@@ -123,7 +127,9 @@ salary_null <- omega %>%
   calculate(stat="diff in means", order= c("male", "female"))
 
 salary_null%>%
-  get_p_value(obs_stat=obs_diff, direction="two-sided")
+  get_p_value(obs_stat=obs_diff, direction="two-sided") %>% 
+      kable()%>%
+kable_styling()
 
 
 
@@ -182,8 +188,11 @@ obs_diff_exp <- omega %>%
   specify(experience~gender)%>%
   calculate(stat="diff in means", order=c("male","female"))
 
-experience_null %>%
-  get_p_value(obs_stat=obs_diff_exp, direction="two-sided")
+
+  experience_null %>%
+  get_p_value(obs_stat=obs_diff_exp, direction="two-sided") %>% 
+        kable()%>%
+kable_styling()
 ```
 Based on the above tests, there is enough evidence to reject the null hypothesis that there is no difference between the experience of men and women. Based on a critical t-value of -5 and a P-value of almost 0, we can conclude that there is a statistically significant difference between men and women. This conclusion endangers the hypothesis that the differences in salary are based on gender, as experience, is another variable that difference may be coming from.
 
