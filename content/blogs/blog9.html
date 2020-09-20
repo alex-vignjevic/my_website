@@ -13,19 +13,17 @@ categories:
 
 
 
-<div id="download-data" class="section level1">
-<h1>Download data</h1>
 <p>Data on tfl bikes hired is downloaded</p>
 <pre class="r"><code>url &lt;- &quot;https://data.london.gov.uk/download/number-bicycle-hires/ac29363e-e0cb-47cc-a97a-e216d900a6b0/tfl-daily-cycle-hires.xlsx&quot;
 
 # Download TFL data to temporary file
 httr::GET(url, write_disk(bike.temp &lt;- tempfile(fileext = &quot;.xlsx&quot;)))</code></pre>
-<pre><code>## Response [https://airdrive-secure.s3-eu-west-1.amazonaws.com/london/dataset/number-bicycle-hires/2020-09-18T09%3A06%3A54/tfl-daily-cycle-hires.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAJJDIMAIVZJDICKHA%2F20200920%2Feu-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20200920T173305Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=16db4bcc7dba9b2dce897f5c4492289c00ae0c082b45ef73b9c319c1d7e0013a&amp;X-Amz-SignedHeaders=host]
-##   Date: 2020-09-20 17:33
+<pre><code>## Response [https://airdrive-secure.s3-eu-west-1.amazonaws.com/london/dataset/number-bicycle-hires/2020-09-18T09%3A06%3A54/tfl-daily-cycle-hires.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAJJDIMAIVZJDICKHA%2F20200920%2Feu-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20200920T174221Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=652a6fa9e3391bf49a8392f66c7bb012c4b08cc6d2b359797ba034e77d73a5df&amp;X-Amz-SignedHeaders=host]
+##   Date: 2020-09-20 17:42
 ##   Status: 200
 ##   Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
 ##   Size: 165 kB
-## &lt;ON DISK&gt;  C:\Users\vignj\AppData\Local\Temp\RtmpioRaDO\file5284ab51d57.xlsx</code></pre>
+## &lt;ON DISK&gt;  C:\Users\vignj\AppData\Local\Temp\RtmpOCOYtF\file10d04f3771de.xlsx</code></pre>
 <pre class="r"><code># Use read_excel to read it as dataframe
 bike0 &lt;- read_excel(bike.temp,
                    sheet = &quot;Data&quot;,
@@ -101,4 +99,3 @@ labs(x=NULL, y=&quot;Bike Rentals&quot;, caption=&quot;Source: TfL, London Data 
   scale_x_discrete(labels=c(&quot;Jan&quot;, &quot;Feb&quot;, &quot;Mar&quot;, &quot;Apr&quot;, &quot;May&quot;, &quot;Jun&quot;, &quot;Jul&quot;, &quot;Aug&quot;, &quot;Sep&quot;, &quot;Oct&quot;, &quot;Nov&quot;, &quot;Dec&quot;))+ geom_line(color=&quot;blue&quot;)</code></pre>
 <p><img src="/blogs/blog9_files/figure-html/unnamed-chunk-2-1.png" width="648" style="display: block; margin: auto;" /></p>
 <p>The plot shows us that over time the usage of bikes hired per month has overall increased. The highest drop was during the lockdown in 2020 as can be seen in the plot.</p>
-</div>

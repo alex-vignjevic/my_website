@@ -76,14 +76,9 @@ First, we take a look at the data.
 glimpse(data)
 ```
 
-```{r,include=FALSE}
-skim(data)%>%
-  kable()%>%
-  kable_styling()
 
-```
 
-In the original dataset, there are 24062 observations and 106 variables. There are 41 numerical variables and 43 categorical/factor variables as seen in the table above. 
+In the original dataset, there are 24062 observations and 106 variables. There are 41 numerical variables and 43 categorical/factor variables.
 
 
 
@@ -117,13 +112,6 @@ listings <- listings %>%
     cleaning_fee = parse_number(cleaning_fee),
     extra_people = parse_number(extra_people),
     security_deposit = parse_number(security_deposit))
-
-# checking if the variables have been turned to numeric and if there are missing values
-listings %>% 
-  select(price, cleaning_fee, extra_people,security_deposit) %>% 
-  skim()%>%
-  kable()%>%
-  kable_styling()
 ```
 
 
@@ -345,10 +333,7 @@ Finally we will inspect the accommodates variable. We want to filter out the 737
 Some of the variables have missing values. Cleaning fee, for example, which will be used to calculate price for four nights, has 7049 missing values, as seen below. This is most likely because these listings do not charge a cleaning fee, so we will treat N/A values as 0.  
 
 ```{r}
-listings%>%
-skim(cleaning_fee)%>%
-  kable()%>%
-  kable_styling()
+
 
 listings <- listings %>%
   mutate(cleaning_fee = case_when(
@@ -384,9 +369,6 @@ First, we will examine the host_experience_y variable that was created, which de
 kable(favstats(~host_experience_y, data=listings))%>%
   kable_styling()
 
-skim(listings$host_experience_y)%>%
-  kable()%>%
-  kable_styling()
 
 ggplot(listings, aes(x=host_experience_y)) +
   geom_density(fill = "lavender") + 
@@ -399,9 +381,7 @@ The average number of years of how long a host has been listed is 4.39.
 
 Next, we will look at host_is_superhost. We might want to use this in our model to examine whether superhosts tend to charge a premium.  
 ```{r}
-skim(listings$host_is_superhost)%>%
-  kable()%>%
-  kable_styling()
+
 
 listings %>%
   count(host_is_superhost)%>%
@@ -421,10 +401,7 @@ Based on the data above, roughly 1/4 of all hosts in Cape Town are super hosts.
 
 Now, we look at number_of_reviews, which represents the total number of reviews on a particular listing. 
 ```{r}
-listings%>%
-  skim(number_of_reviews)%>%
-  kable()%>%
-  kable_styling()
+
 
 kable(favstats(~number_of_reviews, data=listings))%>%
   kable_styling()
@@ -716,11 +693,7 @@ Next, we fit a regression model with prop_type_simplified.
 # ***** Fit linear regression models: First, just the mean
 model0 <- lm(log (price_4_nights) ~ 1, data= listings)
 
-model0 %>% 
-  broom::tidy(conf.int=TRUE)
 
-model0 %>% 
-  broom::glance()
 
 # ***** Fit linear regression models: criminals on 3 explanatory variables.
 model1 <- lm(log (price_4_nights) ~ prop_type_simplified, data= listings)
