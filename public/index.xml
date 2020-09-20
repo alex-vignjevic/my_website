@@ -6,10 +6,22 @@
     <description>Recent content on Portfolio Website for Alex Vignjevic</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 07 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 20 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Airbnb data analysis of Cape Town</title>
+      <link>/blogs/blog7/</link>
+      <pubDate>Sun, 20 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blogs/blog7/</guid>
+      <description>Executive SummaryThis analysis uses Airbnb data to predict the price of an airbnb for two people for 4 nights in Cape Town.
+First, the data is cleaned and the variables are put into right format.
+Second, the variables of interest are examined further and informative graphs and tables are provided.
+Third, the regression model for price prediction is created and examined.</description>
+    </item>
     
     <item>
       <title>Mask Acceptance</title>
@@ -66,18 +78,6 @@
       <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
 You can embed an R code chunk like this:
 summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
-    </item>
-    
-    <item>
-      <title>Airbnb data analysis of Cape Town</title>
-      <link>/blogs/blog7/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/blogs/blog7/</guid>
-      <description>Executive SummaryThis analysis uses Airbnb data to predict the price of an airbnb for two people for 4 nights in Cape Town.
-First, the data is cleaned and the variables are put into right format.
-Second, the variables of interest are examined further and informative graphs and tables are provided.
-Third, the regression model for price prediction is created and examined.</description>
     </item>
     
     <item>

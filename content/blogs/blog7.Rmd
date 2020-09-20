@@ -1,6 +1,6 @@
 ---
 title: "Airbnb data analysis of Cape Town"
-date: '2020-19-07'
+date: '2020-09-20'
 description: What determines the price of an Airbnb in Cape Town?
 draft: no
 image: pic18.jpg
