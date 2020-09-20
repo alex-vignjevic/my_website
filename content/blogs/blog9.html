@@ -1,7 +1,7 @@
 ---
 title: "Analysis of tfl London bikes hired"
 date: '2020-09-20'
-description: What does the data say?
+description: 
 draft: no
 image: pic14.jpg
 keywords: ''
@@ -18,12 +18,12 @@ categories:
 
 # Download TFL data to temporary file
 httr::GET(url, write_disk(bike.temp &lt;- tempfile(fileext = &quot;.xlsx&quot;)))</code></pre>
-<pre><code>## Response [https://airdrive-secure.s3-eu-west-1.amazonaws.com/london/dataset/number-bicycle-hires/2020-09-18T09%3A06%3A54/tfl-daily-cycle-hires.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAJJDIMAIVZJDICKHA%2F20200920%2Feu-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20200920T175609Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=dbbc50c6eb63e2d713ffc6fc0653246676a702268f8c3e84ec092ae00a47a9c9&amp;X-Amz-SignedHeaders=host]
-##   Date: 2020-09-20 17:56
+<pre><code>## Response [https://airdrive-secure.s3-eu-west-1.amazonaws.com/london/dataset/number-bicycle-hires/2020-09-18T09%3A06%3A54/tfl-daily-cycle-hires.xlsx?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAJJDIMAIVZJDICKHA%2F20200920%2Feu-west-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20200920T202531Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=68c6d8466a811cc655dc6236bc1395badc25ca37faba547fe89c594a86283cb0&amp;X-Amz-SignedHeaders=host]
+##   Date: 2020-09-20 20:25
 ##   Status: 200
 ##   Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
 ##   Size: 165 kB
-## &lt;ON DISK&gt;  C:\Users\vignj\AppData\Local\Temp\RtmpucNWW9\file44cc2ed75d8.xlsx</code></pre>
+## &lt;ON DISK&gt;  C:\Users\vignj\AppData\Local\Temp\RtmpQ1OElb\file174022fc31f4.xlsx</code></pre>
 <pre class="r"><code># Use read_excel to read it as dataframe
 bike0 &lt;- read_excel(bike.temp,
                    sheet = &quot;Data&quot;,
