@@ -377,7 +377,7 @@ listings <- listings%>%
 
 First, we will examine the host_experience_y variable that was created, which demonstrates how long a host has been listed on Airbnb. 
 
-```{r}
+```{r host}
 
 #Descriptive Analysis
 

@@ -69,13 +69,15 @@ summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
     </item>
     
     <item>
-      <title>blog7</title>
+      <title>Airbnb data analysis of Cape Town</title>
       <link>/blogs/blog7/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/blogs/blog7/</guid>
-      <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</description>
+      <description>Executive SummaryThis analysis uses Airbnb data to predict the price of an airbnb for two people for 4 nights in Cape Town.
+First, the data is cleaned and the variables are put into right format.
+Second, the variables of interest are examined further and informative graphs and tables are provided.
+Third, the regression model for price prediction is created and examined.</description>
     </item>
     
     <item>
